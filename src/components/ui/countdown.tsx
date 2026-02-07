@@ -163,26 +163,30 @@ export function Countdown({ targetDate, className }: CountdownProps) {
   return (
     <div
       className={cn(
-        "relative flex flex-col items-center justify-center px-4 py-24 w-full",
+        "relative flex flex-col items-center w-full",
         className
       )}
     >
-      {/* Cloud background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1282px] h-[763px] pointer-events-none opacity-50">
-        <Image
-          src="/images/cloud-6.png"
-          alt=""
-          fill
-          className="object-contain"
-        />
+      <div className="flex flex-col items-center gap-1 pt-[350px] sm:pt-[380px] pb-10">
+        <h1 className="font-ghavettor text-[#dbdbdb] text-4xl sm:text-5xl md:text-6xl leading-none">
+          Coming Soon
+        </h1>
+        <p className="font-caslon text-[#dbdbdb] text-[10px] sm:text-xs tracking-[3px] uppercase text-center">
+          THE PAGE WILL BE AVAILABLE SOON!
+        </p>
       </div>
 
-      <div className="relative z-10 flex flex-col items-center gap-10">
-        <p className="font-caslon text-[#f0f0f0] text-lg sm:text-[25px] tracking-[3px] text-center">
-          PAGE COMING SOON...
-        </p>
+      <div className="relative flex flex-col items-center gap-5 pb-24">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1282px] h-[763px] pointer-events-none opacity-50">
+          <Image
+            src="/images/cloud-6.png"
+            alt=""
+            fill
+            className="object-contain"
+          />
+        </div>
 
-        <div className="flex flex-col items-center gap-5">
+        <div className="relative z-10 flex flex-col items-center gap-8 pb-12">
           <CircularDecoration filledCount={tick} />
 
           {target ? (
