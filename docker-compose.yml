@@ -1,23 +1,38 @@
 services:
-  # Shared PostgreSQL database for Triggers ecosystem
-  # This is the same database used by Triggers-Backend-Api
-  db:
-    image: postgres:16-alpine
-    container_name: web-earth-leveling-db
+  web:
+    image: ghcr.io/triggersstudio/web-earth-leveling:latest
+    container_name: web-earth-leveling
     restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: triggers
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - NODE_ENV=production
+      - SESSION_SECRET=${SESSION_SECRET}
+    depends_on:
+      db:
+        condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: [ "CMD", "wget", "-q", "--spider", "http://localhost:3000" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-volumes:
-  postgres_data:
+
+#   db:
+#     image: postgres:16-alpine
+#     container_name: web-earth-leveling-db
+#     restart: unless-stopped
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_DB: triggers
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     healthcheck:
+#       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+
+# volumes:
+#   postgres_data:
