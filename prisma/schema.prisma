@@ -1,0 +1,401 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// SHARED MODELS FROM TRIGGERS-BACKEND-API
+// These models are shared with the Triggers ecosystem
+// ============================================
+
+model User {
+  id                        String                   @id @default(cuid())
+  email                     String                   @unique
+  username                  String?                  @unique
+  passwordHash              String?                  @map("password_hash")
+  isBanned                  Boolean                  @default(false) @map("is_banned")
+  bannedAt                  DateTime?                @map("banned_at")
+  bannedReason              String?                  @map("banned_reason")
+  isEmailVerified           Boolean                  @default(false) @map("is_email_verified")
+  emailVerifiedAt           DateTime?                @map("email_verified_at")
+  isActive                  Boolean                  @default(true) @map("is_active")
+  createdAt                 DateTime                 @default(now()) @map("created_at")
+  updatedAt                 DateTime                 @updatedAt @map("updated_at")
+
+  // Triggers relationships
+  microsoftAccount          MicrosoftAccount?
+  userSessions              UserSession[]
+  emailVerificationTokens   EmailVerificationToken[]
+  passwordResetTokens       PasswordResetToken[]
+  actionHistory             UserActionHistory[]
+  launcherValidations       LauncherValidation[]
+  launcherTokens            LauncherToken[]
+
+  // Web-Earth-Leveling specific relationships (for future use)
+  // Add any WEL-specific relationships here
+
+  @@map("users")
+}
+
+model MicrosoftAccount {
+  id                   String    @id @default(cuid())
+  userId               String    @unique @map("user_id")
+  email                String?
+  minecraftUuid        String?   @unique @map("minecraft_uuid")
+  name                 String?
+  xuid                 String?
+  gamertag             String?
+  ageGroup             String?   @map("age_group")
+  accessToken          String?   @map("access_token")
+  refreshToken         String?   @map("refresh_token")
+  clientToken          String?   @map("client_token")
+  accessTokenExpiresAt DateTime? @map("access_token_expires_at")
+  metaJson             Json?     @map("meta_json")
+  profileJson          Json?     @map("profile_json")
+  rawJson              Json?     @map("raw_json")
+  userProperties       Json?     @map("user_properties")
+  linkedAt             DateTime  @default(now()) @map("linked_at")
+  createdAt            DateTime  @default(now()) @map("created_at")
+  updatedAt            DateTime  @updatedAt @map("updated_at")
+
+  user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("microsoft_accounts")
+}
+
+model UserSession {
+  id           String   @id @default(cuid())
+  userId       String   @map("user_id")
+  socketId     String?  @map("socket_id")
+  launcherId   String?  @map("launcher_id")
+  instanceId   String?  @map("instance_id")
+  platform     String?
+  version      String?
+  ipAddress    String?  @map("ip_address")
+  userAgent    String?  @map("user_agent")
+  isOnline     Boolean  @default(true) @map("is_online")
+  lastActivity DateTime @default(now()) @map("last_activity")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_sessions")
+}
+
+// === EMAIL TOKENS ===
+
+model EmailVerificationToken {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("email_verification_tokens")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  ipAddress String?   @map("ip_address")
+  userAgent String?   @map("user_agent")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("password_reset_tokens")
+}
+
+// === ADMIN ===
+
+model AdminUser {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  username     String         @unique
+  passwordHash String         @map("password_hash")
+  role         AdminRole      @default(admin)
+  isActive     Boolean        @default(true) @map("is_active")
+  lastLogin    DateTime?      @map("last_login")
+  createdBy    String?        @map("created_by")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+
+  sessions     AdminSession[]
+  actionLogs   AdminActionLog[]
+
+  @@map("admin_users")
+}
+
+enum AdminRole {
+  admin
+  super_admin
+}
+
+model AdminSession {
+  id        String    @id @default(cuid())
+  adminId   String    @map("admin_id")
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  ipAddress String?   @map("ip_address")
+  userAgent String?   @map("user_agent")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  admin     AdminUser @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("admin_sessions")
+}
+
+model AdminActionLog {
+  id           String    @id @default(cuid())
+  adminId      String    @map("admin_id")
+  action       String
+  resourceType String?   @map("resource_type")
+  resourceId   String?   @map("resource_id")
+  details      Json?
+  ipAddress    String?   @map("ip_address")
+  userAgent    String?   @map("user_agent")
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  admin        AdminUser @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("admin_action_logs")
+}
+
+// === GAME INSTANCES (Triggers Launcher) ===
+
+model LauncherConfig {
+  id            String         @id @default(cuid())
+  name          String         @unique
+  autoUpdate    Boolean        @default(true) @map("auto_update")
+  dataDirectory String         @default("Triggers Client") @map("data_directory")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+
+  instances     GameInstance[]
+  newsItems     NewsItem[]
+
+  @@map("launcher_configs")
+}
+
+model GameInstance {
+  id                   String                 @id @default(cuid())
+  name                 String                 @unique
+  url                  String?
+  serverIp             String?                @map("server_ip")
+  serverPort           Int?                   @map("server_port")
+  serverName           String?                @map("server_name")
+  loaderType           String?                @map("loader_type")
+  loaderVersion        String?                @map("loader_version")
+  minecraftVersion     String?                @map("minecraft_version")
+  verify               Boolean                @default(false)
+  password             String?
+  whitelistActive      Boolean                @default(false) @map("whitelist_active")
+  whitelist            Json?
+  verifyBypassUsers    Json?                  @map("verify_bypass_users")
+  ignored              Json?
+  maintenanceActive    Boolean                @default(false) @map("maintenance_active")
+  maintenanceMessage   String?                @map("maintenance_message")
+  backgroundVideoUrl   String?                @map("background_video_url")
+  launcherConfigId     String?                @map("launcher_config_id")
+  createdAt            DateTime               @default(now()) @map("created_at")
+  updatedAt            DateTime               @updatedAt @map("updated_at")
+
+  launcherConfig       LauncherConfig?        @relation(fields: [launcherConfigId], references: [id])
+  newsItems            NewsItem[]
+  metrics              InstanceMetric[]
+  serverStats          LauncherServerStat[]
+  realtimeStats        LauncherRealtimeStat[]
+
+  @@map("game_instances")
+}
+
+model NewsItem {
+  id               String          @id @default(cuid())
+  title            String
+  content          String
+  author           String?
+  image            String?
+  publishDate      DateTime?       @map("publish_date")
+  redirectUrl      String?         @map("redirect_url")
+  launcherConfigId String?         @map("launcher_config_id")
+  instanceId       String?         @map("instance_id")
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+
+  launcherConfig   LauncherConfig? @relation(fields: [launcherConfigId], references: [id])
+  instance         GameInstance?   @relation(fields: [instanceId], references: [id])
+
+  @@map("news_items")
+}
+
+// === METRICS ===
+
+model SystemMetric {
+  id                  String   @id @default(cuid())
+  timestamp           DateTime @default(now())
+  activeConnections   Int      @default(0) @map("active_connections")
+  totalUsers          Int      @default(0) @map("total_users")
+  totalInstances      Int      @default(0) @map("total_instances")
+  peakConcurrentUsers Int      @default(0) @map("peak_concurrent_users")
+  newRegistrations    Int      @default(0) @map("new_registrations")
+
+  @@map("system_metrics")
+}
+
+model DailyStat {
+  id                   String   @id @default(cuid())
+  date                 DateTime @unique @db.Date
+  uniqueUsers          Int      @default(0) @map("unique_users")
+  totalSessions        Int      @default(0) @map("total_sessions")
+  peakConcurrent       Int      @default(0) @map("peak_concurrent")
+  totalPlaytimeMinutes Int      @default(0) @map("total_playtime_minutes")
+  mostPopularInstance  String?  @map("most_popular_instance")
+  createdAt            DateTime @default(now()) @map("created_at")
+
+  @@map("daily_stats")
+}
+
+model InstanceMetric {
+  id                            String       @id @default(cuid())
+  instanceId                    String       @map("instance_id")
+  timestamp                     DateTime     @default(now())
+  connectedUsers                Int          @default(0) @map("connected_users")
+  totalSessionsToday            Int          @default(0) @map("total_sessions_today")
+  averageSessionDurationMinutes Float        @default(0) @map("average_session_duration_minutes")
+
+  instance                      GameInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+
+  @@map("instance_metrics")
+}
+
+model RealtimeEvent {
+  id         String   @id @default(cuid())
+  eventType  String   @map("event_type")
+  userId     String?  @map("user_id")
+  instanceId String?  @map("instance_id")
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("realtime_events")
+}
+
+// === LAUNCHER VALIDATION ===
+
+model LauncherValidation {
+  id               String   @id @default(cuid())
+  userId           String?  @map("user_id")
+  playerName       String   @map("player_name")
+  playerUuid       String   @map("player_uuid")
+  serverId         String   @map("server_id")
+  tokenHash        String?  @map("token_hash")
+  validationResult Boolean  @default(false) @map("validation_result")
+  requestData      Json?    @map("request_data")
+  responseData     Json?    @map("response_data")
+  processingTimeMs Int?     @map("processing_time_ms")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  user             User?    @relation(fields: [userId], references: [id])
+
+  @@map("launcher_validations")
+}
+
+model LauncherEvent {
+  id                     String   @id @default(cuid())
+  eventType              String   @map("event_type")
+  userId                 String?  @map("user_id")
+  instanceId             String?  @map("instance_id")
+  sessionDurationSeconds Int?     @map("session_duration_seconds")
+  metadata               Json?
+  createdAt              DateTime @default(now()) @map("created_at")
+
+  @@map("launcher_events")
+}
+
+model LauncherToken {
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  tokenHash  String   @unique @map("token_hash")
+  expiresAt  DateTime @map("expires_at")
+  usageCount Int      @default(0) @map("usage_count")
+  isActive   Boolean  @default(true) @map("is_active")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("launcher_tokens")
+}
+
+model LauncherServerStat {
+  id         String       @id @default(cuid())
+  instanceId String       @map("instance_id")
+  date       DateTime     @db.Date
+  data       Json
+  createdAt  DateTime     @default(now()) @map("created_at")
+
+  instance   GameInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+
+  @@unique([instanceId, date])
+  @@map("launcher_server_stats")
+}
+
+model LauncherRealtimeStat {
+  id         String       @id @default(cuid())
+  instanceId String       @unique @map("instance_id")
+  data       Json
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+
+  instance   GameInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+
+  @@map("launcher_realtime_stats")
+}
+
+// === USER ACTIONS ===
+
+model UserActionHistory {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  action    String
+  details   Json?
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_actions_history")
+}
+
+// === EMAIL LOGS ===
+
+model EmailLog {
+  id             String   @id @default(cuid())
+  emailType      String   @map("email_type")
+  recipientEmail String   @map("recipient_email")
+  subject        String
+  templateName   String?  @map("template_name")
+  success        Boolean  @default(false)
+  errorMessage   String?  @map("error_message")
+  provider       String?
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("email_logs")
+}
+
+// ============================================
+// WEB-EARTH-LEVELING SPECIFIC MODELS
+// Add any models specific to this project below
+// ============================================
+
+// Example: If Web-Earth-Leveling needs its own data models,
+// add them here. They will coexist with the shared models.
