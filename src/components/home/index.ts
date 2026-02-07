@@ -1,0 +1,17 @@
+export { SupportBar } from "./support-bar";
+export { Navbar } from "./navbar";
+export { HeroSection } from "./hero-section";
+export { PreOrderSection } from "./pre-order-section";
+export { NewsSection } from "./news-section";
+export { CharactersSection } from "./characters-section";
+export { FeaturesSection } from "./features-section";
+export { MajorsHeader } from "./majors-header";
+export { MajorsFrame } from "./majors-frame";
+export { MajorsSection } from "./majors-section";
+export { WorldEvolutionSection } from "./world-evolution-section";
+export { OpenWorldSection } from "./open-world-section";
+export { EditionsSection } from "./editions-section";
+export { EarthSection } from "./earth-section";
+export { PathsSection } from "./paths-section";
+export { SocialSidebar } from "./social-sidebar";
+export { Footer } from "./footer";
