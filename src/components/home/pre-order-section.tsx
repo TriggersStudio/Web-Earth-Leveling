@@ -26,9 +26,13 @@ export function PreOrderSection() {
             <span className="font-chamberi-display font-bold text-[#dbdbdb] text-base sm:text-lg lg:text-base tracking-wide">
               COMING SOON (2027)
             </span>
-            <h2 className="font-ghavettor text-gradient-gold text-4xl sm:text-5xl lg:text-6xl leading-none">
-              Pre-Order
-            </h2>
+            <Image
+              src="/preorder.svg"
+              alt="Pre-Order"
+              width={185}
+              height={52}
+              className="h-auto w-[185px] sm:w-[220px] lg:w-[260px]"
+            />
           </div>
 
           {/* CTA Button */}

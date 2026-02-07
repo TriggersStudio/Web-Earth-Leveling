@@ -55,11 +55,11 @@ export function WorldEvolutionSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const features = [
-    { icon: imgIcon1, text: "A Persistent Living World", description: "Every action matters. The world evolves through player decisions, wars, alliances, and long-term consequences." },
-    { icon: imgIcon2, text: "Multiple Paths, One World", description: "Choose your role. Hunter, Nation Leader, Scientist, Strategist, .... Each path offers unique mechanics, responsibilities, and impact." },
-    { icon: imgIcon3, text: "Guilds, Nations & Influence", description: "Form guilds, build nations, control territories, and shape geopolitics. Diplomacy can be as powerful as force." },
-    { icon: imgIcon3, text: "High-Risk Dungeons & Raids", description: "From early Gates to S-Rank Class Raids, danger scales with ambition. Failure has consequences — sometimes permanent." },
-    { icon: imgIcon3, text: "Evolving Systems & World Events", description: "Major updates, global events, and hidden systems continuously reshape the world. Nothing stays static. Adapt or fall behind." },
+    { icon: imgIcon1, text: "A Persistent Living World", description: "Every action matters. The world evolves through player decisions, wars, alliances, and long-term consequences.", cardImage: "/images/preorder-bg.png" },
+    { icon: imgIcon2, text: "Multiple Paths, One World", description: "Choose your role. Hunter, Nation Leader, Scientist, Strategist, .... Each path offers unique mechanics, responsibilities, and impact.", cardImage: "/images/Multi paths one world.png" },
+    { icon: imgIcon3, text: "Guilds, Nations & Influence", description: "Form guilds, build nations, control territories, and shape geopolitics. Diplomacy can be as powerful as force.", cardImage: "/images/Guild nations-influence.png" },
+    { icon: imgIcon3, text: "High-Risk Dungeons & Raids", description: "From early Gates to S-Rank Class Raids, danger scales with ambition. Failure has consequences — sometimes permanent.", cardImage: imgCard },
+    { icon: imgIcon3, text: "Evolving Systems & World Events", description: "Major updates, global events, and hidden systems continuously reshape the world. Nothing stays static. Adapt or fall behind.", cardImage: "/images/Evolving Systems-World Events.png" },
   ];
 
   return (
@@ -108,10 +108,11 @@ export function WorldEvolutionSection() {
               {/* Image */}
               <div className="absolute inset-0">
                 <Image
-                  src={imgCard}
+                  key={activeIndex}
+                  src={features[activeIndex].cardImage}
                   alt=""
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105 animate-[fadeIn_0.3s_ease-out]"
                 />
               </div>
 
