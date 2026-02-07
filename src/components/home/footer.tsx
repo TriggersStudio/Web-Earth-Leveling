@@ -11,17 +11,17 @@ const supportLinks = [
 ];
 
 const legalLinks = [
-  { label: "Conditions Générales de Vente", href: "/cgv" },
-  { label: "Condition Générales d'Utilisation", href: "/cgu" },
-  { label: "Politique de Confidentialité", href: "/privacy" },
+  { label: "Terms of Sale", href: "/cgv" },
+  { label: "Terms of Use", href: "/cgu" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 const triggersLinks = [
   { label: "SUPPORT", href: "/support" },
-  { label: "CONDITIONS GÉNÉRALES D'UTILISATION", href: "/cgu" },
-  { label: "CONDITIONS GÉNÉRALES DE VENTE", href: "/cgv" },
-  { label: "POLITIQUE DE CONFIDENTIALITÉ", href: "/privacy" },
-  { label: "TRAVAILLER AVEC NOUS", href: "/jobs" },
+  { label: "TERMS OF USE", href: "/cgu" },
+  { label: "TERMS OF SALE", href: "/cgv" },
+  { label: "PRIVACY POLICY", href: "/privacy" },
+  { label: "WORK WITH US", href: "/jobs" },
 ];
 
 const socialIcons = [

@@ -41,7 +41,7 @@ export function SocialSidebar() {
 
         {/* Triggers Studio Logo with gradient effect */}
         <Link
-          href="https://triggers.studio"
+          href="https://triggersstudio.com"
           target="_blank"
           rel="noopener noreferrer"
           className="w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center group relative"

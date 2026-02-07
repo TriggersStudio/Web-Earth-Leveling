@@ -46,7 +46,7 @@ export function SupportBar() {
           </span>
           <div className="relative w-[42px] h-[15px] shrink-0">
             <Image
-              src="/images/support-flags.png"
+              src="/images/support-flags.svg"
               alt="Language"
               fill
               className="object-contain"

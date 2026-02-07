@@ -206,42 +206,47 @@ export function EditionsSection() {
               </div>
 
               {/* Edition Buttons Grid */}
-              <div className="flex flex-col gap-3 w-full max-w-md">
-                <div className="flex gap-3">
-                  <EditionButton
-                    label="STANDARD"
-                    variant="STANDARD"
-                    isActive={selectedEdition === "STANDARD"}
-                    onClick={() => setSelectedEdition("STANDARD")}
-                  />
-                  <EditionButton
-                    label="HUNTER"
-                    variant="HUNTER"
-                    isActive={selectedEdition === "HUNTER"}
-                    onClick={() => setSelectedEdition("HUNTER")}
-                  />
+              <div className="flex gap-6 items-center w-full max-w-md">
+                <div className="flex flex-col gap-3">
+                  <div className="flex gap-3">
+                    <EditionButton
+                      label="STANDARD"
+                      variant="STANDARD"
+                      isActive={selectedEdition === "STANDARD"}
+                      onClick={() => setSelectedEdition("STANDARD")}
+                    />
+                    <EditionButton
+                      label="HUNTER"
+                      variant="HUNTER"
+                      isActive={selectedEdition === "HUNTER"}
+                      onClick={() => setSelectedEdition("HUNTER")}
+                    />
+                  </div>
+                  <div className="flex gap-3">
+                    <EditionButton
+                      label="NATION"
+                      variant="NATION"
+                      isActive={selectedEdition === "NATION"}
+                      onClick={() => setSelectedEdition("NATION")}
+                    />
+                    <EditionButton
+                      label="MONARCH"
+                      variant="MONARCH"
+                      isActive={selectedEdition === "MONARCH"}
+                      onClick={() => setSelectedEdition("MONARCH")}
+                    />
+                  </div>
                 </div>
-                <div className="flex gap-3">
-                  <EditionButton
-                    label="NATION"
-                    variant="NATION"
-                    isActive={selectedEdition === "NATION"}
-                    onClick={() => setSelectedEdition("NATION")}
-                  />
-                  <EditionButton
-                    label="MONARCH"
-                    variant="MONARCH"
-                    isActive={selectedEdition === "MONARCH"}
-                    onClick={() => setSelectedEdition("MONARCH")}
-                  />
-                </div>
+                <span className="font-chamberi-display font-bold text-[#808080] text-sm tracking-wide uppercase">
+                  FREE
+                </span>
               </div>
             </div>
 
             {/* Coming Soon Section */}
-            <div className="flex flex-col gap-4 items-center lg:items-start w-full">
+            <div className="flex flex-col gap-4 items-center w-full">
               <p className="font-chamberi-display font-bold text-[#f0f0f0] text-base sm:text-lg lg:text-xl text-center lg:text-left leading-tight">
-                BIENTÔT DISPONIBLE SUR
+                COMING SOON ON
               </p>
               <div className="relative w-[124px] sm:w-[160px] lg:w-[124px] h-[63px] sm:h-[80px] lg:h-[63px]" style={{ filter: "drop-shadow(0px 0px 100px rgba(0,0,0,0.6))" }}>
                 <Image

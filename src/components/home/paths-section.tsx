@@ -26,7 +26,7 @@ const roles = [
     tagline: "Those who face the inhuman.",
     descriptions: [
       "Hunters stand on the front line against Gates, dungeons, and world-level threats. They grow through real combat, high-risk Raids, and constant confrontation with death.",
-      "The greater the danger, the faster the ascent — but failure may carry permanent consequences.",
+      "The greater the danger, the faster the ascent, but failure may carry permanent consequences.",
     ],
   },
   {
@@ -36,7 +36,7 @@ const roles = [
     tagline: "Knowledge shapes the future.",
     descriptions: [
       "Scientists study Gates, anomalies, energy systems, and forbidden technologies. Their discoveries unlock new infrastructures, advanced systems, and world-changing innovations.",
-      "Progress comes with responsibility — and sometimes, irreversible consequences.",
+      "Progress comes with responsibility, and sometimes, irreversible consequences.",
     ],
   },
   {
@@ -46,7 +46,7 @@ const roles = [
     tagline: "Builders of power.",
     descriptions: [
       "Engineers turn ideas into reality. They design and maintain infrastructures, energy networks, defenses, and industrial systems. They are also responsible for developing weapons, equipment, and advanced gear used by Hunters on the battlefield.",
-      "Without Engineers, progress stops — and wars are lost before they begin.",
+      "Without Engineers, progress stops and wars are lost before they begin.",
     ],
   },
   {
@@ -56,7 +56,7 @@ const roles = [
     tagline: "Power comes with responsibility.",
     descriptions: [
       "Nation Leaders govern territories, populations, and institutions. They define laws, manage diplomacy, declare wars, and shape national identity.",
-      "Every decision leaves a mark — prosperity, rebellion, or collapse.",
+      "Every decision leaves a mark. Prosperity, rebellion, or collapse.",
     ],
   },
   {
@@ -66,7 +66,7 @@ const roles = [
     tagline: "The art of influence.",
     descriptions: [
       "Economic Strategists are masters of long-term dominance. They create and manage companies, control resource flows, shape markets, and influence global development. Through economic planning, corporate power, and discreet espionage, they weaken rivals long before conflict begins.",
-      "Their battlefield is invisible — but decisive.",
+      "Their battlefield is invisible, but decisive.",
     ],
   },
   {
@@ -107,7 +107,7 @@ export function PathsSection() {
         <div className="flex items-center gap-3 lg:gap-6">
           <div className="w-10 sm:w-14 lg:w-[74px] h-px bg-linear-to-r from-transparent to-[#f0f0f0]" />
           <span className="font-caslon text-[#f0f0f0] text-xs sm:text-sm lg:text-sm tracking-wider text-center">
-            A second specialization is possible — but progression will be slower.
+            A second specialization is possible, but progression will be slower.
           </span>
           <div className="w-10 sm:w-14 lg:w-[74px] h-px bg-linear-to-l from-transparent to-[#f0f0f0]" />
         </div>

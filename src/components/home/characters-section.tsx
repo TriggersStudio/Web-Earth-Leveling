@@ -5,7 +5,7 @@ const imgCharacter = "/images/character-hero1.png";
 export function CharactersSection() {
   return (
     <section className="w-full py-12 lg:py-24 px-4 sm:px-8 lg:px-16 overflow-hidden">
-      <div className="max-w-[870px] mx-auto flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+      <div className="max-w-[870px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
         {/* Text Content */}
         <div className="flex flex-col gap-6 lg:gap-10 flex-1">
           {/* Title */}
