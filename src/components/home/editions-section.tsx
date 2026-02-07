@@ -159,7 +159,7 @@ function EditionButton({ label, variant, isActive = false, onClick }: EditionBut
 }
 
 export function EditionsSection() {
-  const [selectedEdition, setSelectedEdition] = useState<EditionVariant>("HUNTER");
+  const [selectedEdition, setSelectedEdition] = useState<EditionVariant>("STANDARD");
 
   const currentCard = editionCards[selectedEdition];
 
@@ -206,40 +206,40 @@ export function EditionsSection() {
               </div>
 
               {/* Edition Buttons Grid */}
-              <div className="flex gap-6 items-center w-full max-w-md">
-                <div className="flex flex-col gap-3">
-                  <div className="flex gap-3">
+              <div className="flex flex-col gap-3 w-full max-w-md">
+                <div className="flex gap-3">
+                  <div className="relative">
                     <EditionButton
                       label="STANDARD"
                       variant="STANDARD"
                       isActive={selectedEdition === "STANDARD"}
                       onClick={() => setSelectedEdition("STANDARD")}
                     />
-                    <EditionButton
-                      label="HUNTER"
-                      variant="HUNTER"
-                      isActive={selectedEdition === "HUNTER"}
-                      onClick={() => setSelectedEdition("HUNTER")}
-                    />
+                    <div className="absolute -top-2 -right-2 bg-emerald-500/90 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full leading-none tracking-wider shadow-lg">
+                      FREE
+                    </div>
                   </div>
-                  <div className="flex gap-3">
-                    <EditionButton
-                      label="NATION"
-                      variant="NATION"
-                      isActive={selectedEdition === "NATION"}
-                      onClick={() => setSelectedEdition("NATION")}
-                    />
-                    <EditionButton
-                      label="MONARCH"
-                      variant="MONARCH"
-                      isActive={selectedEdition === "MONARCH"}
-                      onClick={() => setSelectedEdition("MONARCH")}
-                    />
-                  </div>
+                  <EditionButton
+                    label="HUNTER"
+                    variant="HUNTER"
+                    isActive={selectedEdition === "HUNTER"}
+                    onClick={() => setSelectedEdition("HUNTER")}
+                  />
                 </div>
-                <span className="font-chamberi-display font-bold text-[#808080] text-sm tracking-wide uppercase">
-                  FREE
-                </span>
+                <div className="flex gap-3">
+                  <EditionButton
+                    label="NATION"
+                    variant="NATION"
+                    isActive={selectedEdition === "NATION"}
+                    onClick={() => setSelectedEdition("NATION")}
+                  />
+                  <EditionButton
+                    label="MONARCH"
+                    variant="MONARCH"
+                    isActive={selectedEdition === "MONARCH"}
+                    onClick={() => setSelectedEdition("MONARCH")}
+                  />
+                </div>
               </div>
             </div>
 
