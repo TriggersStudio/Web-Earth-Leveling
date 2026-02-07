@@ -19,7 +19,7 @@ export default async function DashboardPage() {
     <div className="container py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold">
-          Bonjour, {user.firstName || user.email} !
+          Bonjour, {user.username || user.email} !
         </h1>
         <p className="text-muted-foreground">
           Bienvenue sur votre tableau de bord
@@ -38,16 +38,10 @@ export default async function DashboardPage() {
                 <dt className="text-muted-foreground">Email</dt>
                 <dd>{user.email}</dd>
               </div>
-              {user.firstName && (
+              {user.username && (
                 <div>
-                  <dt className="text-muted-foreground">Prénom</dt>
-                  <dd>{user.firstName}</dd>
-                </div>
-              )}
-              {user.lastName && (
-                <div>
-                  <dt className="text-muted-foreground">Nom</dt>
-                  <dd>{user.lastName}</dd>
+                  <dt className="text-muted-foreground">Nom d&apos;utilisateur</dt>
+                  <dd>{user.username}</dd>
                 </div>
               )}
             </dl>

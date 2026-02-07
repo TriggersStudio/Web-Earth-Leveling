@@ -1,9 +1,12 @@
 import { db } from "./db";
 import { cookies } from "next/headers";
-import { randomBytes, scrypt, timingSafeEqual } from "crypto";
+import { randomBytes, scrypt, timingSafeEqual, createHmac } from "crypto";
 import { promisify } from "util";
 
 const scryptAsync = promisify(scrypt);
+
+// Secret key for signing session tokens (should be in env in production)
+const SESSION_SECRET = process.env.SESSION_SECRET || "default-secret-change-in-production";
 
 export async function hashPassword(password: string): Promise<string> {
   const salt = randomBytes(16).toString("hex");
@@ -28,17 +31,36 @@ export function generateSessionToken(): string {
   return randomBytes(32).toString("hex");
 }
 
-export async function createSession(userId: string) {
-  const token = generateSessionToken();
-  const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+function createSignedToken(userId: string, expiresAt: Date): string {
+  const payload = JSON.stringify({ userId, exp: expiresAt.getTime() });
+  const payloadBase64 = Buffer.from(payload).toString("base64url");
+  const signature = createHmac("sha256", SESSION_SECRET)
+    .update(payloadBase64)
+    .digest("base64url");
+  return `${payloadBase64}.${signature}`;
+}
 
-  const session = await db.session.create({
-    data: {
-      userId,
-      token,
-      expiresAt,
-    },
-  });
+function verifySignedToken(token: string): { userId: string; exp: number } | null {
+  try {
+    const [payloadBase64, signature] = token.split(".");
+    if (!payloadBase64 || !signature) return null;
+
+    const expectedSignature = createHmac("sha256", SESSION_SECRET)
+      .update(payloadBase64)
+      .digest("base64url");
+
+    if (signature !== expectedSignature) return null;
+
+    const payload = JSON.parse(Buffer.from(payloadBase64, "base64url").toString());
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+export async function createSession(userId: string) {
+  const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); 
+  const token = createSignedToken(userId, expiresAt);
 
   const cookieStore = await cookies();
   cookieStore.set("session_token", token, {
@@ -49,7 +71,7 @@ export async function createSession(userId: string) {
     path: "/",
   });
 
-  return session;
+  return { userId, expiresAt };
 }
 
 export async function getSession() {
@@ -58,16 +80,20 @@ export async function getSession() {
 
   if (!token) return null;
 
-  const session = await db.session.findUnique({
-    where: { token },
-    include: { user: true },
-  });
+  const payload = verifySignedToken(token);
+  if (!payload) return null;
 
-  if (!session || session.expiresAt < new Date()) {
+  if (payload.exp < Date.now()) {
     return null;
   }
 
-  return session;
+  const user = await db.user.findUnique({
+    where: { id: payload.userId },
+  });
+
+  if (!user) return null;
+
+  return { user, expiresAt: new Date(payload.exp) };
 }
 
 export async function getCurrentUser() {
@@ -77,11 +103,5 @@ export async function getCurrentUser() {
 
 export async function logout() {
   const cookieStore = await cookies();
-  const token = cookieStore.get("session_token")?.value;
-
-  if (token) {
-    await db.session.deleteMany({ where: { token } });
-  }
-
   cookieStore.delete("session_token");
 }

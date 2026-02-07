@@ -9,8 +9,6 @@ const registerSchema = z.object({
   email: z.string().email("Email invalide"),
   password: z.string().min(8, "Le mot de passe doit contenir au moins 8 caractères"),
   confirmPassword: z.string(),
-  firstName: z.string().min(1, "Prénom requis"),
-  lastName: z.string().min(1, "Nom requis"),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Les mots de passe ne correspondent pas",
   path: ["confirmPassword"],
@@ -34,8 +32,6 @@ export async function register(
     email: formData.get("email") as string,
     password: formData.get("password") as string,
     confirmPassword: formData.get("confirmPassword") as string,
-    firstName: formData.get("firstName") as string,
-    lastName: formData.get("lastName") as string,
   };
 
   const result = registerSchema.safeParse(rawData);
@@ -45,7 +41,7 @@ export async function register(
     return { error: firstError?.message || "Données invalides" };
   }
 
-  const { email, password, firstName, lastName } = result.data;
+  const { email, password } = result.data;
 
   const existingUser = await db.user.findUnique({
     where: { email },
@@ -61,8 +57,6 @@ export async function register(
     data: {
       email,
       passwordHash,
-      firstName,
-      lastName,
     },
   });
 
