@@ -29,7 +29,7 @@ const socialIcons = [
   { name: "Instagram", href: "https://instagram.com/", icon: "instagram" },
   { name: "X", href: "https://x.com/", icon: "x" },
   { name: "TikTok", href: "https://tiktok.com/", icon: "tiktok" },
-  { name: "Discord", href: "https://discord.gg/", icon: "discord" },
+  { name: "Discord", href: "https://discord.gg/GU6GY9K4WG", icon: "discord" },
   { name: "Reddit", href: "https://reddit.com/", icon: "reddit" },
 ];
 

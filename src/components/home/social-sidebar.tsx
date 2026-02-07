@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const socialLinks = [
-  { name: "Discord", href: "https://discord.gg/", icon: "discord" },
+  { name: "Discord", href: "https://discord.gg/GU6GY9K4WG", icon: "discord" },
   { name: "YouTube", href: "https://youtube.com/", icon: "youtube" },
   { name: "X", href: "https://x.com/", icon: "x" },
   { name: "Instagram", href: "https://instagram.com/", icon: "instagram" },
