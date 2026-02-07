@@ -44,66 +44,6 @@ export default function HomePage() {
               className="object-cover object-top"
               priority
             />
-            {/* Eye glow overlay */}
-            <div className="absolute inset-0 pointer-events-none">
-              {/* Flicker effect - quick flash before glow starts */}
-              <div
-                className="hero-eye-flicker absolute w-3 h-3 rounded-full"
-                style={{
-                  top: "31%",
-                  left: "46.3%",
-                  background: "radial-gradient(circle, rgba(0,180,255,0.9) 0%, transparent 70%)",
-                  filter: "blur(2px)",
-                }}
-              />
-
-              {/* Primary eye - bright core */}
-              <div
-                className="hero-eye-glow absolute w-4 h-3 rounded-full"
-                style={{
-                  top: "30.5%",
-                  left: "46%",
-                  background: "radial-gradient(ellipse, rgba(0,200,255,0.95) 0%, rgba(0,150,255,0.4) 50%, transparent 80%)",
-                  filter: "blur(3px)",
-                }}
-              />
-
-              {/* Primary eye - large aura */}
-              <div
-                className="hero-eye-aura absolute w-16 h-14 rounded-full"
-                style={{
-                  top: "27.5%",
-                  left: "44%",
-                  background: "radial-gradient(ellipse, rgba(0,160,255,0.3) 0%, rgba(0,100,255,0.1) 40%, transparent 70%)",
-                  filter: "blur(12px)",
-                }}
-              />
-
-              {/* Secondary eye - subtle glow */}
-              <div
-                className="hero-eye-glow absolute w-2 h-2 rounded-full"
-                style={{
-                  top: "31%",
-                  left: "49.8%",
-                  background: "radial-gradient(circle, rgba(0,180,255,0.5) 0%, transparent 70%)",
-                  filter: "blur(3px)",
-                  animationDelay: "1.7s",
-                }}
-              />
-
-              {/* Secondary eye - subtle aura */}
-              <div
-                className="hero-eye-aura absolute w-10 h-8 rounded-full"
-                style={{
-                  top: "28.5%",
-                  left: "48.5%",
-                  background: "radial-gradient(ellipse, rgba(0,140,255,0.15) 0%, transparent 60%)",
-                  filter: "blur(8px)",
-                  animationDelay: "1.7s",
-                }}
-              />
-            </div>
-
             <div
               className="absolute inset-0"
               style={{
