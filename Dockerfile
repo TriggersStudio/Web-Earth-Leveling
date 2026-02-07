@@ -24,8 +24,8 @@ ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 ENV NEXT_PUBLIC_APP_NAME=$NEXT_PUBLIC_APP_NAME
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# RUN npx prisma generate
-# RUN npm run build
+RUN npx prisma generate
+RUN npm run build
 
 # ===== Stage 3: Runner =====
 FROM node:20-alpine AS runner
