@@ -6,7 +6,7 @@ import Link from "next/link";
 const socialLinks = [
   { name: "Discord", href: "https://discord.gg/GU6GY9K4WG", icon: "discord" },
   { name: "YouTube", href: "https://youtube.com/", icon: "youtube" },
-  { name: "X", href: "https://x.com/", icon: "x" },
+  { name: "X", href: "https://x.com/Earth_Leveling", icon: "x" },
   { name: "Instagram", href: "https://instagram.com/", icon: "instagram" },
   { name: "Reddit", href: "https://reddit.com/", icon: "reddit" },
   { name: "TikTok", href: "https://tiktok.com/", icon: "tiktok" },

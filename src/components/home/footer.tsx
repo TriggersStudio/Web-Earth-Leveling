@@ -30,7 +30,7 @@ const triggersLinks = [
 const socialIcons = [
   { name: "YouTube", href: "https://youtube.com/", icon: "youtube" },
   { name: "Instagram", href: "https://instagram.com/", icon: "instagram" },
-  { name: "X", href: "https://x.com/", icon: "x" },
+  { name: "X", href: "https://x.com/Earth_Leveling", icon: "x" },
   { name: "TikTok", href: "https://tiktok.com/", icon: "tiktok" },
   { name: "Discord", href: "https://discord.gg/GU6GY9K4WG", icon: "discord" },
   { name: "Reddit", href: "https://reddit.com/", icon: "reddit" },
