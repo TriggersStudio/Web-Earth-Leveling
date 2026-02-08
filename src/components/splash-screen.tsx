@@ -266,9 +266,9 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         className="absolute inset-0 flex items-center justify-center px-4"
         style={{ opacity: logoOpacity }}
       >
-        <div className="w-full max-w-[280px] md:max-w-[621px]">
-          <div className="relative w-full" style={{ aspectRatio: "621 / 236" }}>
-            <Image src="/logo.png" alt="Earth Leveling" fill className="object-contain" priority />
+        <div className="w-full max-w-[300px] md:max-w-[500px]">
+          <div className="relative w-full" style={{ aspectRatio: "1281 / 1244" }}>
+            <Image src="/images/earth-leveling-logo.svg" alt="Earth Leveling" fill className="object-contain" priority />
           </div>
         </div>
       </div>

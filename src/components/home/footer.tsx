@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const supportLinks = [
   { label: "Universe", href: "/universe" },
@@ -34,6 +37,9 @@ const socialIcons = [
 ];
 
 export function Footer() {
+  const [logoClicks, setLogoClicks] = useState(0);
+  const isOldLogo = logoClicks >= 10;
+
   return (
     <footer className="relative bg-[#040c17] shadow-[0px_36px_250px_0px_#010409]">
       <div className="flex flex-col lg:flex-row">
@@ -89,12 +95,15 @@ export function Footer() {
 
             {/* Earth Leveling Logo - Centered */}
             <div className="flex justify-center">
-              <div className="relative w-44 lg:w-[154px] h-16 lg:h-[58px]">
+              <div
+                className="relative w-24 h-24 lg:w-[100px] lg:h-[96px] cursor-pointer select-none"
+                onClick={() => setLogoClicks((c) => c + 1)}
+              >
                 <Image
-                  src="/images/earth-leveling-text-logo.png"
+                  src={isOldLogo ? "/images/earth-leveling-text-logo.png" : "/images/earth-leveling-logo.svg"}
                   alt="Earth Leveling"
                   fill
-                  className="object-contain"
+                  className="object-contain transition-opacity duration-300"
                 />
               </div>
             </div>

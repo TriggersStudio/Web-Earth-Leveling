@@ -4,7 +4,7 @@ export const siteConfig: SiteConfig = {
   name: process.env.NEXT_PUBLIC_APP_NAME || "Earth Leveling",
   description: "Earth Leveling HYTALE server",
   url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-  ogImage: "/earth-leveling-logo.png",
+  ogImage: "/images/earth-leveling-logo.svg",
   links: {
     github: "https://github.com",
   },
