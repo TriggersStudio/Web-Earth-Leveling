@@ -96,11 +96,11 @@ export function Footer() {
             {/* Earth Leveling Logo - Centered */}
             <div className="flex justify-center">
               <div
-                className="relative w-24 h-24 lg:w-[100px] lg:h-[96px] cursor-pointer select-none"
+                className="relative w-48 h-20 lg:w-[200px] lg:h-[86px] cursor-pointer select-none"
                 onClick={() => setLogoClicks((c) => c + 1)}
               >
                 <Image
-                  src={isOldLogo ? "/images/earth-leveling-text-logo.png" : "/images/earth-leveling-logo.svg"}
+                  src={isOldLogo ? "/images/earth-leveling-text-logo.png" : "/images/earth-leveling-logo-text.svg"}
                   alt="Earth Leveling"
                   fill
                   className="object-contain transition-opacity duration-300"

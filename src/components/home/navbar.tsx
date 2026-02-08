@@ -74,9 +74,9 @@ export function Navbar() {
       <nav className={`fixed top-[50px] left-0 right-0 w-full py-3 px-4 sm:px-6 lg:px-12 z-50 transition-all duration-300 ${isScrolled ? "bg-black/50 backdrop-blur-md" : "bg-transparent"}`}>
         <div className="max-w-6xl mx-auto flex items-center justify-center gap-[90px]">
           <Link href="/" className="flex items-center shrink-0">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[52px] lg:h-[50px] relative">
+            <div className="w-28 h-12 sm:w-34 sm:h-[56px] lg:w-[125px] lg:h-[54px] relative">
               <Image
-                src="/images/earth-leveling-logo.svg"
+                src="/images/earth-leveling-logo-text.svg"
                 alt="Earth Leveling"
                 fill
                 className="object-contain"
