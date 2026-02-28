@@ -8,9 +8,9 @@ type FeatureCardProps = {
 
 function FeatureCard({ title, description, imageUrl }: FeatureCardProps) {
   return (
-    <div className="flex flex-col items-center gap-4 group cursor-pointer">
-      {/* Shield Image with Title overlay */}
-      <div className="relative w-52 h-60 sm:w-60 sm:h-72 lg:w-[277px] lg:h-[313px] transition-transform duration-300 group-hover:scale-105">
+    <div className="flex flex-col items-center">
+      {/* Shield Image with Title and Description overlay */}
+      <div className="relative w-52 h-60 sm:w-60 sm:h-72 lg:w-[277px] lg:h-[313px]">
         <Image
           src={imageUrl}
           alt={title.join(' ')}
@@ -21,26 +21,26 @@ function FeatureCard({ title, description, imageUrl }: FeatureCardProps) {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'linear-gradient(to top, rgba(3, 9, 18, 0.9) 0%, rgba(3, 9, 18, 0.5) 30%, transparent 60%)'
+            background: 'linear-gradient(to top, rgba(3, 9, 18, 0.95) 0%, rgba(3, 9, 18, 0.7) 35%, transparent 60%)'
           }}
         />
-        {/* Title - positioned at bottom of image */}
-        <div className="absolute bottom-6 sm:bottom-8 lg:bottom-10 left-0 right-0 flex flex-col items-center z-10">
-          {title.map((line, index) => (
-            <h3
-              key={index}
-              className="font-chamberi-display font-extrabold text-[#dbdbdb] text-base sm:text-lg lg:text-xl xl:text-2xl text-center uppercase leading-tight"
-            >
-              {line}
-            </h3>
-          ))}
+        {/* Title - positioned above description */}
+        <div className="absolute bottom-1 sm:bottom-2 lg:bottom-2 left-0 right-0 flex flex-col items-center gap-2 px-3 z-10">
+          <div className="flex flex-col items-center">
+            {title.map((line, index) => (
+              <h3
+                key={index}
+                className="font-chamberi-display font-extrabold text-[#dbdbdb] text-base sm:text-lg lg:text-xl xl:text-2xl text-center uppercase leading-tight"
+              >
+                {line}
+              </h3>
+            ))}
+          </div>
+          <p className="font-caslon text-[#dbdbdb] text-xs sm:text-sm lg:text-sm text-center max-w-[220px] leading-relaxed">
+            {description}
+          </p>
         </div>
       </div>
-
-      {/* Description */}
-      <p className="font-caslon text-[#dbdbdb] text-xs sm:text-sm lg:text-sm text-center max-w-[247px] leading-relaxed">
-        {description}
-      </p>
     </div>
   );
 }
@@ -81,7 +81,7 @@ export function FeaturesSection() {
     <section className="w-full py-16 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-[870px] mx-auto flex flex-col items-center gap-12 lg:gap-16 mb-24">
         {/* Title */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-2">
           <span className="font-chamberi-display font-bold text-[#8c8c8c] text-sm sm:text-base lg:text-lg tracking-[0.4em] uppercase">
             EARTH LEVELING
           </span>
@@ -94,7 +94,7 @@ export function FeaturesSection() {
                 className="object-contain"
               />
             </div>
-            <h2 className="font-ghavettor text-[#f0f0f0] text-3xl sm:text-4xl lg:text-5xl text-center">
+            <h2 className="font-ghavettor text-gradient-silver text-3xl sm:text-4xl lg:text-5xl text-center">
               A living World to Conquer
             </h2>
           </div>

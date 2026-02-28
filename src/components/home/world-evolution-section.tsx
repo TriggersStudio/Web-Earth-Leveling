@@ -21,18 +21,20 @@ type FeatureItemProps = {
 
 function FeatureItem({ icon, text, isActive = false, onClick }: FeatureItemProps) {
   return (
-    <div onClick={onClick} className="relative p-[2px] rounded-l-full cursor-pointer group" style={{ background: isActive ? "linear-gradient(180deg, #E2E2D6 0%, #160856 100%)" : "#2c2c2c" }}>
-      {/* Gradient border on hover */}
-      <div
-        className={`absolute inset-0 rounded-l-full transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
-        style={{ background: "linear-gradient(180deg, #E2E2D6 0%, #160856 100%)" }}
-      />
+    <div onClick={onClick} className="relative p-[2px] rounded-l-full cursor-pointer" style={{ background: isActive ? "linear-gradient(180deg, #E2E2D6 0%, #160856 100%)" : "#2c2c2c" }}>
+      {/* Gradient border when active */}
+      {isActive && (
+        <div
+          className="absolute inset-0 rounded-l-full"
+          style={{ background: "linear-gradient(180deg, #E2E2D6 0%, #160856 100%)" }}
+        />
+      )}
       <div
         className="relative flex items-center gap-4 lg:gap-[13px] h-[44px] sm:h-[50px] lg:h-[45px] px-6 lg:px-[25px] rounded-l-full overflow-hidden transition-all duration-300"
       >
         {/* Background */}
-        <div className={`absolute inset-0 rounded-l-full transition-all duration-300 ${isActive ? "bg-linear-to-r from-[#123161] to-[#06162f]" : "bg-linear-to-r from-[#061326] to-[#040c19] group-hover:from-[#123161] group-hover:to-[#06162f]"}`} />
-        <div className={`absolute inset-0 rounded-l-full overflow-hidden mix-blend-luminosity transition-opacity duration-300 ${isActive ? "opacity-40" : "opacity-30 group-hover:opacity-40"}`}>
+        <div className={`absolute inset-0 rounded-l-full transition-all duration-300 ${isActive ? "bg-linear-to-r from-[#123161] to-[#06162f]" : "bg-linear-to-r from-[#0a1a30] to-[#060e1c]"}`} />
+        <div className={`absolute inset-0 rounded-l-full overflow-hidden mix-blend-luminosity transition-opacity duration-300 ${isActive ? "opacity-40" : "opacity-20"}`}>
           <Image src={imgBg} alt="" fill className="object-cover" />
         </div>
 
@@ -41,8 +43,7 @@ function FeatureItem({ icon, text, isActive = false, onClick }: FeatureItemProps
           <Image src={icon} alt="" fill className="object-contain" />
         </div>
         <span
-          className={`relative z-10 font-caslon text-xs lg:text-[13px] transition-colors duration-300 ${isActive ? "text-[#dbdbdb]" : "text-[#868686] group-hover:text-[#dbdbdb]"
-            }`}
+          className={`relative z-10 font-caslon text-xs lg:text-[13px] transition-colors duration-300 ${isActive ? "text-[#dbdbdb]" : "text-[#b0b0b0]"}`}
         >
           {text}
         </span>
@@ -66,7 +67,7 @@ export function WorldEvolutionSection() {
     <section className="w-full py-12 lg:py-20 px-4 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-[914px] mx-auto flex flex-col gap-10 lg:gap-[64px]">
         {/* Title */}
-        <div className="flex flex-col items-center gap-4 lg:gap-6">
+        <div className="flex flex-col items-center gap-2">
           <span className="font-chamberi-display font-bold text-[#8c8c8c] text-xs sm:text-sm lg:text-base tracking-[0.4em] uppercase">
             HOW THE WORLD EVOLVE
           </span>
@@ -74,7 +75,7 @@ export function WorldEvolutionSection() {
             <div className="w-8 h-10 sm:w-10 sm:h-12 lg:w-[30px] lg:h-[40px] relative">
               <Image src={imgVector} alt="" fill className="object-contain" />
             </div>
-            <h2 className="font-ghavettor text-[#f0f0f0] text-3xl sm:text-4xl lg:text-5xl text-center">
+            <h2 className="font-ghavettor text-gradient-silver text-3xl sm:text-4xl lg:text-5xl text-center">
               Earth Leveling
             </h2>
           </div>

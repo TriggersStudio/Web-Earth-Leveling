@@ -60,16 +60,16 @@ export function Footer() {
           </div>
 
           {/* Content - with padding */}
-          <div className="relative z-10 flex flex-col justify-between h-full gap-8 lg:gap-12 py-12 lg:py-[60px] px-8 sm:px-12 lg:px-[60px]">
+          <div className="relative z-10 flex flex-col justify-between h-full gap-12 lg:gap-[72px] py-[72px] lg:py-[90px] px-12 sm:px-[72px] lg:px-[90px]">
             {/* Top Links Section */}
             <div className="flex flex-col gap-4">
               {/* Support Links - Left aligned */}
-              <div className="flex flex-wrap gap-x-8 lg:gap-x-12 gap-y-2">
+              <div className="flex flex-wrap gap-x-12 lg:gap-x-[72px] gap-y-3">
                 {supportLinks.map((link, index) => (
                   <Link
                     key={index}
                     href={link.href}
-                    className="font-semibold text-[#f0f0f0] text-[12px] hover:text-white transition-colors"
+                    className="font-semibold text-[#f0f0f0] text-[18px] hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -77,15 +77,15 @@ export function Footer() {
               </div>
 
               {/* Separator - gradient line */}
-              <div className="w-full h-px bg-gradient-to-r from-[#f0f0f0]/50 to-transparent" />
+              <div className="w-full h-px bg-linear-to-r from-[#f0f0f0]/50 to-transparent" />
 
               {/* Legal Links - Left aligned */}
-              <div className="flex flex-wrap gap-x-5 lg:gap-x-[19px] gap-y-2">
+              <div className="flex flex-wrap gap-x-8 lg:gap-x-[28px] gap-y-3">
                 {legalLinks.map((link, index) => (
                   <Link
                     key={index}
                     href={link.href}
-                    className="font-semibold text-[#f0f0f0] text-[12px] hover:text-white transition-colors"
+                    className="font-semibold text-[#f0f0f0] text-[18px] hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -96,7 +96,7 @@ export function Footer() {
             {/* Earth Leveling Logo - Centered */}
             <div className="flex justify-center">
               <div
-                className="relative w-48 h-20 lg:w-[200px] lg:h-[86px] cursor-pointer select-none"
+                className="relative w-72 h-[120px] lg:w-[300px] lg:h-[129px] cursor-pointer select-none"
                 onClick={() => setLogoClicks((c) => c + 1)}
               >
                 <Image
@@ -109,11 +109,11 @@ export function Footer() {
             </div>
 
             {/* Bottom Section */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-9">
               {/* Social Icons - Centered with lines */}
-              <div className="flex items-center justify-center gap-4 w-full">
-                <div className="flex-1 max-w-32 lg:max-w-[210px] h-px bg-gradient-to-r from-transparent to-[#f0f0f0]/50" />
-                <div className="flex items-center gap-5 lg:gap-6">
+              <div className="flex items-center justify-center gap-6 w-full">
+                <div className="flex-1 h-px bg-linear-to-r from-transparent to-[#f0f0f0]/50" />
+                <div className="flex items-center gap-8 lg:gap-9">
                   {socialIcons.map((social) => (
                     <Link
                       key={social.name}
@@ -127,14 +127,14 @@ export function Footer() {
                     </Link>
                   ))}
                 </div>
-                <div className="flex-1 max-w-32 lg:max-w-[210px] h-px bg-gradient-to-l from-transparent to-[#f0f0f0]/50" />
+                <div className="flex-1 h-px bg-linear-to-l from-transparent to-[#f0f0f0]/50" />
               </div>
 
               {/* Bottom Bar - 3 columns */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 w-full">
                 {/* PEGI Rating - Left */}
-                <div className="flex items-start gap-1 flex-1">
-                  <div className="relative w-8 lg:w-[32px] h-10 lg:h-[39px]">
+                <div className="flex items-start gap-1.5 flex-1">
+                  <div className="relative w-12 lg:w-[48px] h-[60px] lg:h-[58px]">
                     <Image
                       src="/images/pegi-12.png"
                       alt="PEGI 12"
@@ -142,7 +142,7 @@ export function Footer() {
                       className="object-contain"
                     />
                   </div>
-                  <div className="relative w-6 lg:w-[26px] h-6 lg:h-[26px]">
+                  <div className="relative w-9 lg:w-[39px] h-9 lg:h-[39px]">
                     <Image
                       src="/images/violence-icon.png"
                       alt="Violence"
@@ -153,16 +153,16 @@ export function Footer() {
                 </div>
 
                 {/* Copyright - Center */}
-                <p className="font-medium text-[#f0f0f0] text-[12px] text-center flex-1">
-                  © 2026 Earth Leveling. All Rights Reserved.
+                <p className="font-medium text-[#f0f0f0] text-[18px] text-center flex-1">
+                  &copy; 2026 Earth Leveling. All Rights Reserved.
                 </p>
 
                 {/* Language Selector - Right */}
-                <div className="flex items-center justify-end gap-2 cursor-pointer hover:opacity-80 transition-opacity flex-1">
-                  <span className="text-base">🇺🇸</span>
-                  <span className="font-medium text-[#f0f0f0] text-[12px]">English</span>
+                <div className="flex items-center justify-end gap-3 cursor-pointer hover:opacity-80 transition-opacity flex-1">
+                  <span className="text-xl">🇺🇸</span>
+                  <span className="font-medium text-[#f0f0f0] text-[18px]">English</span>
                   <svg
-                    className="w-3 h-3 text-[#f0f0f0]"
+                    className="w-4 h-4 text-[#f0f0f0]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -216,7 +216,7 @@ export function Footer() {
 }
 
 function SocialIcon({ name }: { name: string }) {
-  const iconClass = "w-4 h-4 lg:w-[13px] lg:h-[13px]";
+  const iconClass = "w-6 h-6 lg:w-[20px] lg:h-[20px]";
 
   switch (name) {
     case "youtube":

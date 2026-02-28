@@ -89,12 +89,12 @@ export function PathsSection() {
     <section className="w-full py-12 lg:py-24 px-4 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-[870px] mx-auto flex flex-col items-center gap-8 lg:gap-12">
         {/* Title */}
-        <div className="flex flex-col items-center gap-[5px]">
+        <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-3 lg:gap-4">
             <div className="w-8 h-8 lg:w-[41px] lg:h-[47px] relative hidden sm:block">
               <Image src={imgVector1} alt="" fill className="object-contain" />
             </div>
-            <h2 className="font-ghavettor text-[#f0f0f0] text-2xl sm:text-3xl lg:text-5xl text-center">
+            <h2 className="font-ghavettor text-gradient-silver text-2xl sm:text-3xl lg:text-5xl text-center">
               Multiple paths. One destiny
             </h2>
           </div>
@@ -125,13 +125,12 @@ export function PathsSection() {
                   : "hover:scale-105"
                 }`}
             >
-              {/* Gradient border glow for active avatar */}
+              {/* Gradient border ring for active avatar */}
               {activeIndex === index && (
                 <div
-                  className="absolute rounded-full pointer-events-none z-0 border border-[#E2E2D6]"
+                  className="absolute -inset-[1.5px] rounded-full pointer-events-none z-0"
                   style={{
                     background: "linear-gradient(180deg, #E2E2D6 0%, #160856 100%)",
-                    filter: "blur(1px)",
                   }}
                 />
               )}
@@ -156,9 +155,9 @@ export function PathsSection() {
             }`}
         >
           {activeRole && (
-            <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12 pt-4">
+            <div key={activeIndex} className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12 pt-4 animate-[fadeInUp_0.4s_ease-out]">
               {/* Text Content */}
-              <div className="flex flex-col gap-3 flex-1 pt-8 lg:pt-20" key={activeIndex}>
+              <div className="flex flex-col gap-3 flex-1 pt-8 lg:pt-20">
                 <span className="font-chamberi-display font-bold text-[#8c8c8c] text-xs lg:text-sm tracking-wider uppercase animate-[fadeInUp_0.4s_ease-out]">
                   {activeRole.tagline}
                 </span>

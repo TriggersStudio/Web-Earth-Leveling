@@ -9,7 +9,7 @@ export function EarthSection() {
     <section className="w-full py-12 lg:py-24 px-4 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-[814px] mx-auto flex flex-col items-center gap-8 lg:gap-12">
         {/* Title */}
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center gap-2">
           <span className="font-chamberi-display font-bold text-[#8c8c8c] text-xs sm:text-sm lg:text-base tracking-[0.3em] uppercase">
             EXPLORE OUR WORLD
           </span>
@@ -17,7 +17,7 @@ export function EarthSection() {
             <div className="w-10 h-10 lg:w-[47px] lg:h-[40px] relative hidden sm:block">
               <Image src={imgVector} alt="" fill className="object-contain" />
             </div>
-            <h2 className="font-ghavettor text-[#f0f0f0] text-3xl sm:text-4xl lg:text-5xl text-center">
+            <h2 className="font-ghavettor text-gradient-silver text-3xl sm:text-4xl lg:text-5xl text-center">
               The Earth
             </h2>
           </div>

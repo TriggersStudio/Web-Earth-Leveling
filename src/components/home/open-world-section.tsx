@@ -13,16 +13,16 @@ type CardProps = {
 function Card({ imageUrl, title, description }: CardProps) {
   return (
     <div
-      className="relative p-[2px] rounded-[20px] lg:rounded-[30px] cursor-pointer group"
+      className="relative p-[2px] rounded-[14px] cursor-pointer group w-full max-w-[259px] mx-auto"
       style={{ background: "#2c2c2c" }}
     >
       {/* Gradient border on hover */}
       <div
-        className="absolute inset-0 rounded-[20px] lg:rounded-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute inset-0 rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{ background: "linear-gradient(180deg, #E2E2D6 0%, #160856 100%)" }}
       />
 
-      <div className="relative aspect-[2/3] rounded-[18px] lg:rounded-[28px] overflow-hidden">
+      <div className="relative h-[390px] rounded-[12px] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
@@ -43,9 +43,9 @@ function Card({ imageUrl, title, description }: CardProps) {
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
-          <div className="flex flex-col gap-3 lg:gap-4">
+          <div className="flex flex-col gap-3 lg:gap-4 translate-y-6 group-hover:translate-y-0 transition-transform duration-300 ease-out">
             {/* Icon */}
-            <div className="w-5 h-5 lg:w-6 lg:h-6 relative">
+            <div className="w-3 h-3 lg:w-[12px] lg:h-[12px] relative">
               <Image src={imgCardIcon} alt="" fill className="object-contain" />
             </div>
 
@@ -53,7 +53,7 @@ function Card({ imageUrl, title, description }: CardProps) {
             <h3 className="font-qindret text-[#868686] group-hover:text-[#dbdbdb] text-base sm:text-lg lg:text-xl leading-tight transition-colors duration-300">
               {title}
             </h3>
-            <p className="font-caslon text-[#868686] text-xs lg:text-[11px] leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p className="font-caslon text-[#868686] text-xs lg:text-[13px] leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               {description}
             </p>
           </div>
@@ -81,13 +81,13 @@ export function OpenWorldSection() {
     <section className="w-full py-12 lg:py-20 overflow-hidden">
       <div className="max-w-[937px] mx-auto flex flex-col gap-12 lg:gap-16">
         {/* Title Section */}
-        <div className="flex flex-col items-center gap-[5px] px-4 sm:px-8 lg:px-16">
+        <div className="flex flex-col items-center gap-2 px-4 sm:px-8 lg:px-16">
           {/* Main Title */}
           <div className="flex items-center gap-4 lg:gap-6">
             <div className="w-10 h-12 sm:w-12 sm:h-14 lg:w-[36px] lg:h-[40px] relative">
               <Image src={imgTitleIcon} alt="" fill className="object-contain" />
             </div>
-            <h2 className="font-ghavettor text-[#f0f0f0] text-xl sm:text-2xl lg:text-5xl text-center">
+            <h2 className="font-ghavettor text-gradient-silver text-xl sm:text-2xl lg:text-5xl text-center">
               The Largest Semi-RP UGC Open World
             </h2>
           </div>

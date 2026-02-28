@@ -261,16 +261,16 @@ export function EditionsSection() {
 
           {/* Right Side - Edition Card */}
           <div
-            className="rounded-[20px] lg:rounded-[30px] p-4 sm:p-6 lg:p-8 flex flex-col gap-4 lg:gap-6 w-full max-w-md lg:max-w-lg overflow-hidden transition-all duration-500"
+            className="rounded-[16.7px] p-[22px] flex flex-col gap-[18px] items-center w-full max-w-md lg:max-w-lg overflow-hidden transition-all duration-500"
             style={{
-              background: currentCard.cardGradient,
-              borderWidth: "2px",
+              background: "linear-gradient(to bottom, #051a38, #031022)",
+              borderWidth: "0.7px",
               borderStyle: "solid",
               borderColor: currentCard.borderColor,
             }}
           >
             {/* Preview Image */}
-            <div className="relative w-full h-[150px] sm:h-[200px] lg:h-[280px] border-2 border-white rounded-[10px] lg:rounded-[15px] overflow-hidden">
+            <div className="relative w-full h-[150px] sm:h-[200px] lg:h-[235px] rounded-[8.4px] overflow-hidden" style={{ borderWidth: "0.67px", borderStyle: "solid", borderColor: "white" }}>
               <Image
                 src={currentCard.previewImage}
                 alt={`${currentCard.title} Preview`}
@@ -280,10 +280,10 @@ export function EditionsSection() {
             </div>
 
             {/* Features */}
-            <div className="flex flex-col gap-3 lg:gap-4">
+            <div className="flex flex-col gap-[13px] w-full">
               {/* Title */}
-              <div className="flex gap-2 lg:gap-3 items-center">
-                <div className="relative w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 shrink-0">
+              <div className="flex gap-[10px] items-center">
+                <div className="relative w-[15px] h-[15px] shrink-0">
                   <Image
                     src="/images/edition-diamond.svg"
                     alt=""
@@ -291,20 +291,20 @@ export function EditionsSection() {
                     className="object-contain"
                   />
                 </div>
-                <p className="font-chamberi-display font-bold text-[#f0f0f0] text-base sm:text-lg lg:text-xl transition-all duration-300">
+                <p className="font-chamberi-display font-bold text-[#f0f0f0] text-[21px] transition-all duration-300">
                   {currentCard.title}
                 </p>
               </div>
 
               {/* Features List */}
-              <div className="flex flex-col gap-2" key={selectedEdition}>
+              <div className="flex flex-col justify-between flex-1 gap-2" key={selectedEdition}>
                 {currentCard.features.map((feature, index) => (
                   <div
                     key={index}
-                    className="flex gap-2 lg:gap-3 items-center animate-[fadeInUp_0.3s_ease-out_both]"
+                    className="flex gap-[10px] items-center animate-[fadeInUp_0.3s_ease-out_both]"
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
-                    <div className="relative w-3 h-3 sm:w-4 sm:h-4 shrink-0">
+                    <div className="relative w-[10px] h-[10px] shrink-0">
                       <Image
                         src="/images/edition-checkmark.svg"
                         alt=""
@@ -312,7 +312,7 @@ export function EditionsSection() {
                         className="object-contain"
                       />
                     </div>
-                    <p className="font-caslon text-[#cacaca] text-xs sm:text-sm lg:text-base">
+                    <p className="font-caslon text-[#cacaca] text-[15px]">
                       {feature}
                     </p>
                   </div>

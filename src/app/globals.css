@@ -172,6 +172,9 @@
   html,
   body {
     @apply bg-[#030912] text-foreground;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
   }
 }
 
@@ -212,6 +215,13 @@
     background-clip: text;
   }
 
+  .text-gradient-silver {
+    background: linear-gradient(180deg, #f0f0f0 0%, #808080 50%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .gradient-line-left {
     background: linear-gradient(90deg, rgba(240, 240, 240, 0) 0%, #f0f0f0 100%);
   }
@@ -239,5 +249,29 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

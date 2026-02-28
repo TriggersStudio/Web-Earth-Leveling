@@ -25,7 +25,7 @@ function NewsCard({ title, date, imageUrl }: NewsCardProps) {
               src={imageUrl}
               alt={title}
               fill
-              className="object-cover opacity-80 transition-transform duration-500 group-hover:scale-110"
+              className="object-cover opacity-80 transition-transform duration-3000 ease-in-out group-hover:scale-[1.08]"
             />
           </div>
           <div className="absolute inset-0 bg-[rgba(10,10,10,0.5)] group-hover:bg-[rgba(10,10,10,0.3)] transition-colors duration-300" />
@@ -37,7 +37,7 @@ function NewsCard({ title, date, imageUrl }: NewsCardProps) {
         <h3 className="font-qindret text-[#e6e6e6] text-base sm:text-lg lg:text-[17px] leading-normal line-clamp-2 group-hover:text-[#C29FFF] transition-colors">
           {title}
         </h3>
-        <span className="font-chamberi-display font-bold text-[#e6e6e6] text-sm lg:text-[13px]">
+        <span className="font-chamberi-display font-bold text-[#989898] text-sm lg:text-[13px]">
           {date}
         </span>
       </div>
@@ -65,13 +65,14 @@ export function NewsSection() {
   ];
 
   return (
-    <section className="w-full ">
+    <section className="w-full pb-12 lg:pb-20">
       <div className="max-w-[1070px] mx-auto px-6 lg:px-0">
         {/* Header */}
         <div className="flex flex-row items-center justify-between gap-4 mb-8 lg:mb-[30px]">
-          <h2 className="font-ghavettor text-[#f0f0f0] text-4xl sm:text-5xl lg:text-[56px] leading-none">
+          <h2 className="font-ghavettor text-gradient-silver text-4xl sm:text-5xl lg:text-[56px] leading-none">
             News
           </h2>
+
 
           {/* CTA Button */}
           <Link href="/news">

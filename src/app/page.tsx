@@ -37,12 +37,13 @@ export default function HomePage() {
       <div className="relative z-10 flex flex-col">
         <div className="relative h-screen flex flex-col">
           <div className="absolute inset-0 overflow-hidden">
-            <Image
-              src="/images/hero-background.png"
-              alt=""
-              fill
-              className="object-cover object-top"
-              priority
+            <video
+              src="/images/Background.webm"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover object-top"
             />
             <div
               className="absolute inset-0"

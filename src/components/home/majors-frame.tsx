@@ -16,11 +16,11 @@ export function MajorsFrame() {
         />
 
         {/* Content centered inside frame */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 sm:gap-1">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-0">
           {/* Title with lines */}
           <div className="flex items-center gap-2 sm:gap-4">
             <div className="w-6 sm:w-12 lg:w-20 h-px bg-linear-to-r from-transparent to-[#f0f0f0]/40" />
-            <h2 className="font-ghavettor text-[#f0f0f0] text-base sm:text-xl lg:text-[40px] text-center">
+            <h2 className="font-ghavettor text-gradient-silver text-base sm:text-xl lg:text-[40px] text-center">
               The Majors
             </h2>
             <div className="w-6 sm:w-12 lg:w-20 h-px bg-linear-to-l from-transparent to-[#f0f0f0]/40" />

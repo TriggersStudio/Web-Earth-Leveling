@@ -32,7 +32,7 @@ function MajorCard({ title, titleImage, descriptions, year, backgroundImage, bor
       </div>
 
       {/* Title Image */}
-      <div className="relative w-full max-w-[150px] sm:max-w-[200px] lg:max-w-[280px] h-[50px] sm:h-[80px] lg:h-[100px] z-10">
+      <div className="relative w-full max-w-[150px] sm:max-w-[180px] lg:max-w-[202px] h-[50px] sm:h-[140px] lg:h-[181px] z-10">
         <Image
           src={titleImage}
           alt={title}
@@ -45,7 +45,7 @@ function MajorCard({ title, titleImage, descriptions, year, backgroundImage, bor
       <div className="relative z-10 flex flex-col gap-3 lg:gap-4 items-center justify-center">
         {descriptions.map((desc, index) => (
           <div key={index} className="flex items-center justify-center w-full">
-            <p className="font-caslon text-white text-center text-xs sm:text-sm lg:text-sm max-w-[200px] sm:max-w-[250px] lg:max-w-[250px] leading-relaxed">
+            <p className="font-caslon text-white text-center text-xs sm:text-sm lg:text-[14px] max-w-[200px] sm:max-w-[250px] lg:max-w-[250px] leading-relaxed">
               {desc}
             </p>
           </div>
@@ -54,7 +54,7 @@ function MajorCard({ title, titleImage, descriptions, year, backgroundImage, bor
         {/* Year with lines */}
         <div className="flex gap-3 lg:gap-4 items-center justify-center w-full mt-2">
           <div className="w-12 sm:w-16 lg:w-[70px] h-px bg-linear-to-r from-transparent to-[#f0f0f0]/50" />
-          <span className="font-chamberi-display font-bold text-[#f0f0f0] text-lg sm:text-xl lg:text-2xl">
+          <span className="font-chamberi-display font-bold text-[#f0f0f0] text-sm sm:text-base lg:text-[16px]">
             {year}
           </span>
           <div className="w-12 sm:w-16 lg:w-[70px] h-px bg-linear-to-l from-transparent to-[#f0f0f0]/50" />
