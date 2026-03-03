@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const initialState: AuthState = {};
 
 export function LoginForm() {
+  const t = useTranslations("Auth");
   const [state, formAction, pending] = useActionState(login, initialState);
 
   return (
@@ -24,7 +26,7 @@ export function LoginForm() {
             </div>
           )}
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t("email")}</Label>
             <Input
               id="email"
               name="email"
@@ -36,12 +38,12 @@ export function LoginForm() {
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">Mot de passe</Label>
+              <Label htmlFor="password">{t("password")}</Label>
               <Link
                 href="/forgot-password"
                 className="text-sm text-muted-foreground hover:text-primary"
               >
-                Mot de passe oublié ?
+                {t("forgotPassword")}
               </Link>
             </div>
             <Input
@@ -56,7 +58,7 @@ export function LoginForm() {
         <CardFooter>
           <Button className="w-full" type="submit" disabled={pending}>
             {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Se connecter
+            {t("loginButton")}
           </Button>
         </CardFooter>
       </form>

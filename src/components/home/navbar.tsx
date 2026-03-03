@@ -1,43 +1,46 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-
-const navLinks = [
-  { href: "/", label: "HOME" },
-  { href: "/community", label: "COMMUNITY", hasDropdown: true },
-  { href: "/universe", label: "UNIVERSE" },
-  { href: "/news", label: "NEWS" },
-  { href: "/wiki", label: "WIKI" },
-  { href: "/forums", label: "FORUM" },
-  { href: "/shop", label: "SHOP" },
-];
-
-type CommunityItem = { label: string; href: string } | { separator: true };
-
-const communityDropdownItems: CommunityItem[] = [
-  { label: "Organisations", href: "/community/organisation" },
-  { label: "Nations", href: "/community/nation" },
-  { label: "Classements", href: "/community/classement" },
-  { separator: true },
-  { label: "Voter", href: "/community/voter" },
-  { label: "Evénements", href: "/community/evenement" },
-  { label: "Planning", href: "/community/planning" },
-  { separator: true },
-  { label: "Nous Rejoindre", href: "/community/nous-rejoindre" },
-  { label: "Partenaires", href: "/community/partenaire" },
-  { label: "Ambassador Program", href: "/community/ambassadeur" },
-  { label: "Creator Program", href: "/community/creator-programme" },
-];
+import { useTranslations } from "next-intl";
 
 export function Navbar() {
+  const t = useTranslations("Navigation");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCommunityOpen, setIsCommunityOpen] = useState(false);
   const [isMobileCommunityOpen, setIsMobileCommunityOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const navLinks = [
+    { href: "/" as const, label: t("home") },
+    { href: "/community" as const, label: t("community"), hasDropdown: true },
+    { href: "/world" as const, label: t("world") },
+    { href: "/universe" as const, label: t("universe") },
+    { href: "/blog" as const, label: t("news") },
+    { href: "/wiki" as const, label: t("wiki") },
+    { href: "/forums" as const, label: t("forum") },
+    { href: "/shop" as const, label: t("shop") },
+  ];
+
+  type CommunityItem = { label: string; href: string } | { separator: true };
+
+  const communityDropdownItems: CommunityItem[] = [
+    { label: t("organisations"), href: "/community/organisation" },
+    { label: t("nations"), href: "/world" },
+    { label: t("rankings"), href: "/community/classement" },
+    { separator: true },
+    { label: t("vote"), href: "/community/voter" },
+    { label: t("events"), href: "/community/evenement" },
+    { label: t("planning"), href: "/community/planning" },
+    { separator: true },
+    { label: t("joinUs"), href: "/community/nous-rejoindre" },
+    { label: t("partners"), href: "/community/partenaire" },
+    { label: t("ambassadorProgram"), href: "/community/ambassadeur" },
+    { label: t("creatorProgram"), href: "/community/creator-programme" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -144,13 +147,13 @@ export function Navbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-40 bg-[#030912]/95 backdrop-blur-xl lg:hidden transition-all duration-500 ease-out ${isMenuOpen
+        className={`fixed inset-0 z-40 bg-[#030912]/95 backdrop-blur-xl lg:hidden overflow-y-auto transition-all duration-500 ease-out ${isMenuOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
           }`}
       >
         <div
-          className={`flex flex-col items-end justify-center h-full px-8 sm:px-12 overflow-y-auto transition-transform duration-500 ease-out ${isMenuOpen ? "translate-x-0" : "translate-x-1/3"
+          className={`flex flex-col items-end min-h-full justify-center px-8 sm:px-12 py-24 transition-transform duration-500 ease-out ${isMenuOpen ? "translate-x-0" : "translate-x-1/3"
             }`}
         >
           {navLinks.map((link, index) =>

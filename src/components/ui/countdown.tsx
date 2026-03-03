@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface CountdownProps {
   targetDate?: Date | string;
@@ -121,6 +122,7 @@ function CircularDecoration({
 }
 
 export function Countdown({ targetDate, className }: CountdownProps) {
+  const t = useTranslations("Countdown");
   const target = useMemo(
     () => (targetDate ? new Date(targetDate).getTime() : null),
     [targetDate]
@@ -169,10 +171,10 @@ export function Countdown({ targetDate, className }: CountdownProps) {
     >
       <div className="flex flex-col items-center gap-1 pt-[350px] sm:pt-[380px] pb-10">
         <h1 className="font-ghavettor text-[#dbdbdb] text-4xl sm:text-5xl md:text-6xl leading-none">
-          Coming Soon
+          {t("comingSoon")}
         </h1>
         <p className="font-caslon text-[#dbdbdb] text-[10px] sm:text-xs tracking-[3px] uppercase text-center">
-          THE PAGE WILL BE AVAILABLE SOON!
+          {t("pageAvailableSoon")}
         </p>
       </div>
 
@@ -193,10 +195,10 @@ export function Countdown({ targetDate, className }: CountdownProps) {
             <div className="flex items-center gap-3 sm:gap-5">
               {(
                 [
-                  { value: timeLeft?.days, label: "Days" },
-                  { value: timeLeft?.hours, label: "Hours" },
-                  { value: timeLeft?.minutes, label: "Min" },
-                  { value: timeLeft?.seconds, label: "Sec" },
+                  { value: timeLeft?.days, label: t("days") },
+                  { value: timeLeft?.hours, label: t("hours") },
+                  { value: timeLeft?.minutes, label: t("min") },
+                  { value: timeLeft?.seconds, label: t("sec") },
                 ] as const
               ).map((unit, i) => (
                 <div key={unit.label} className="flex items-center gap-3 sm:gap-5">

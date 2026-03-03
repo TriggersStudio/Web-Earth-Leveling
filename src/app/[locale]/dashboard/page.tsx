@@ -1,46 +1,64 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getCurrentUser } from "@/lib/auth";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Votre tableau de bord",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+  return {
+    title: t("dashboardTitle"),
+    description: t("dashboardDescription"),
+  };
+}
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "Dashboard" });
   const user = await getCurrentUser();
 
   if (!user) {
     redirect("/login");
   }
 
+  const displayName = user.username || user.email;
+
   return (
     <div className="container py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold">
-          Bonjour, {user.username || user.email} !
+          {t("hello", { name: displayName })}
         </h1>
         <p className="text-muted-foreground">
-          Bienvenue sur votre tableau de bord
+          {t("welcome")}
         </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle>Profil</CardTitle>
-            <CardDescription>Vos informations personnelles</CardDescription>
+            <CardTitle>{t("profile")}</CardTitle>
+            <CardDescription>{t("personalInfo")}</CardDescription>
           </CardHeader>
           <CardContent>
             <dl className="space-y-2 text-sm">
               <div>
-                <dt className="text-muted-foreground">Email</dt>
+                <dt className="text-muted-foreground">{t("emailLabel")}</dt>
                 <dd>{user.email}</dd>
               </div>
               {user.username && (
                 <div>
-                  <dt className="text-muted-foreground">Nom d&apos;utilisateur</dt>
+                  <dt className="text-muted-foreground">{t("username")}</dt>
                   <dd>{user.username}</dd>
                 </div>
               )}
@@ -50,24 +68,24 @@ export default async function DashboardPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Activité récente</CardTitle>
-            <CardDescription>Vos dernières actions</CardDescription>
+            <CardTitle>{t("recentActivity")}</CardTitle>
+            <CardDescription>{t("lastActions")}</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Aucune activité récente
+              {t("noActivity")}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Statistiques</CardTitle>
-            <CardDescription>Aperçu de vos données</CardDescription>
+            <CardTitle>{t("statistics")}</CardTitle>
+            <CardDescription>{t("dataOverview")}</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Les statistiques seront disponibles prochainement
+              {t("statsComingSoon")}
             </p>
           </CardContent>
         </Card>

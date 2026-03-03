@@ -1,18 +1,21 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
-export function HeroSection() {
+export async function HeroSection() {
+  const t = await getTranslations("Hero");
+
   return (
     <section className="relative flex-1 flex flex-col items-center justify-center lg:justify-end lg:pb-20">
       {/* Content - positioned at the bottom */}
       <div className="relative z-10 flex flex-col items-center justify-end text-center px-4 ">
         {/* Main Title */}
         <h1 className="font-ghavettor text-[#dbdbdb] text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-none">
-          Earth Leveling
+          {t("title")}
         </h1>
 
         {/* Subtitle */}
         <p className="font-caslon text-[#dbdbdb] text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] mt-2">
-          THE ULTIMATE SEMI-RP EARTH SIMULATION
+          {t("subtitle")}
         </p>
 
         {/* Coming Soon Section */}
@@ -23,7 +26,7 @@ export function HeroSection() {
 
             {/* Coming Soon Text */}
             <span className="font-chamberi-display font-bold text-[#dbdbdb] text-lg sm:text-xl whitespace-nowrap drop-shadow-[0_0_40px_rgba(233,204,127,0.5)]">
-              COMING SOON
+              {t("comingSoon")}
             </span>
 
             {/* Right Line */}

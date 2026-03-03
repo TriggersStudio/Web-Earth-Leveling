@@ -1,31 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
-
-const supportLinks = [
-  { label: "Universe", href: "/universe" },
-  { label: "Blog", href: "/blog" },
-  { label: "Community", href: "/community" },
-  { label: "Wiki", href: "/wiki" },
-  { label: "Forums", href: "/forums" },
-  { label: "Shop", href: "/shop" },
-];
-
-const legalLinks = [
-  { label: "Terms of Sale", href: "/cgv" },
-  { label: "Terms of Use", href: "/cgu" },
-  { label: "Privacy Policy", href: "/privacy" },
-];
-
-const triggersLinks = [
-  { label: "SUPPORT", href: "/support" },
-  { label: "TERMS OF USE", href: "/cgu" },
-  { label: "TERMS OF SALE", href: "/cgv" },
-  { label: "PRIVACY POLICY", href: "/privacy" },
-  { label: "WORK WITH US", href: "/jobs" },
-];
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 const socialIcons = [
   { name: "YouTube", href: "https://youtube.com/", icon: "youtube" },
@@ -37,8 +16,32 @@ const socialIcons = [
 ];
 
 export function Footer() {
+  const t = useTranslations("Footer");
   const [logoClicks, setLogoClicks] = useState(0);
   const isOldLogo = logoClicks >= 10;
+
+  const supportLinks = [
+    { label: t("universe"), href: "/universe" as const },
+    { label: t("blog"), href: "/blog" as const },
+    { label: t("community"), href: "/community" as const },
+    { label: t("wiki"), href: "/wiki" as const },
+    { label: t("forums"), href: "/forums" as const },
+    { label: t("shop"), href: "/shop" as const },
+  ];
+
+  const legalLinks = [
+    { label: t("termsOfSale"), href: "/cgv" as const },
+    { label: t("termsOfUse"), href: "/cgu" as const },
+    { label: t("privacyPolicy"), href: "/privacy" as const },
+  ];
+
+  const triggersLinks = [
+    { label: t("support"), href: "/support" as const },
+    { label: t("termsOfUse"), href: "/cgu" as const },
+    { label: t("termsOfSale"), href: "/cgv" as const },
+    { label: t("privacyPolicy"), href: "/privacy" as const },
+    { label: t("workWithUs"), href: "/jobs" as const },
+  ];
 
   return (
     <footer className="relative bg-[#040c17] shadow-[0px_36px_250px_0px_#010409]">
@@ -115,7 +118,7 @@ export function Footer() {
                 <div className="flex-1 h-px bg-linear-to-r from-transparent to-[#f0f0f0]/50" />
                 <div className="flex items-center gap-8 lg:gap-9">
                   {socialIcons.map((social) => (
-                    <Link
+                    <a
                       key={social.name}
                       href={social.href}
                       target="_blank"
@@ -124,7 +127,7 @@ export function Footer() {
                       aria-label={social.name}
                     >
                       <SocialIcon name={social.icon} />
-                    </Link>
+                    </a>
                   ))}
                 </div>
                 <div className="flex-1 h-px bg-linear-to-l from-transparent to-[#f0f0f0]/50" />
@@ -154,21 +157,12 @@ export function Footer() {
 
                 {/* Copyright - Center */}
                 <p className="font-medium text-[#f0f0f0] text-[18px] text-center flex-1">
-                  &copy; 2026 Earth Leveling. All Rights Reserved.
+                  {t("copyright")}
                 </p>
 
                 {/* Language Selector - Right */}
-                <div className="flex items-center justify-end gap-3 cursor-pointer hover:opacity-80 transition-opacity flex-1">
-                  <span className="text-xl">🇺🇸</span>
-                  <span className="font-medium text-[#f0f0f0] text-[18px]">English</span>
-                  <svg
-                    className="w-4 h-4 text-[#f0f0f0]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                <div className="flex items-center justify-end flex-1">
+                  <LanguageSwitcher />
                 </div>
               </div>
             </div>
@@ -189,7 +183,7 @@ export function Footer() {
 
           {/* Description */}
           <p className="text-[#f0f0f0] text-[10px] lg:text-[13px] text-right leading-relaxed">
-            Triggers Studio is an independent game development studio crafting immersive, player-driven worlds. Our mission is to push the boundaries of simulation and community-driven experiences.
+            {t("triggersDesc")}
           </p>
 
           {/* Links */}
@@ -207,7 +201,7 @@ export function Footer() {
 
           {/* Bottom Text */}
           <p className="text-[#a9a9a9] text-[10px] lg:text-[13px] text-right leading-relaxed mt-auto">
-            Earth Leveling is a product of Triggers Studio. All game content, logos, and trademarks are the property of their respective owners.
+            {t("triggersDisclaimer")}
           </p>
         </div>
       </div>

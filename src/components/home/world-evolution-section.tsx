@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 // Asset URLs
 const imgVector = "/images/world-evolution-icon.svg";
@@ -53,14 +54,15 @@ function FeatureItem({ icon, text, isActive = false, onClick }: FeatureItemProps
 }
 
 export function WorldEvolutionSection() {
+  const t = useTranslations("WorldEvolution");
   const [activeIndex, setActiveIndex] = useState(0);
 
   const features = [
-    { icon: imgIcon1, text: "A Persistent Living World", description: "Every action matters. The world evolves through player decisions, wars, alliances, and long-term consequences.", cardImage: "/images/preorder-bg.png" },
-    { icon: imgIcon2, text: "Multiple Paths, One World", description: "Choose your role. Hunter, Nation Leader, Scientist, Strategist, .... Each path offers unique mechanics, responsibilities, and impact.", cardImage: "/images/Multi paths one world.png" },
-    { icon: imgIcon3, text: "Guilds, Nations & Influence", description: "Form guilds, build nations, control territories, and shape geopolitics. Diplomacy can be as powerful as force.", cardImage: "/images/Guild nations-influence.png" },
-    { icon: imgIcon3, text: "High-Risk Dungeons & Raids", description: "From early Gates to S-Rank Class Raids, danger scales with ambition. Failure has consequences — sometimes permanent.", cardImage: imgCard },
-    { icon: imgIcon3, text: "Evolving Systems & World Events", description: "Major updates, global events, and hidden systems continuously reshape the world. Nothing stays static. Adapt or fall behind.", cardImage: "/images/Evolving Systems-World Events.png" },
+    { icon: imgIcon1, text: t("feature1"), description: t("feature1Desc"), cardImage: "/images/preorder-bg.png" },
+    { icon: imgIcon2, text: t("feature2"), description: t("feature2Desc"), cardImage: "/images/Multi paths one world.png" },
+    { icon: imgIcon3, text: t("feature3"), description: t("feature3Desc"), cardImage: "/images/Guild nations-influence.png" },
+    { icon: imgIcon3, text: t("feature4"), description: t("feature4Desc"), cardImage: imgCard },
+    { icon: imgIcon3, text: t("feature5"), description: t("feature5Desc"), cardImage: "/images/Evolving Systems-World Events.png" },
   ];
 
   return (
@@ -69,14 +71,14 @@ export function WorldEvolutionSection() {
         {/* Title */}
         <div className="flex flex-col items-center gap-2">
           <span className="font-chamberi-display font-bold text-[#8c8c8c] text-xs sm:text-sm lg:text-base tracking-[0.4em] uppercase">
-            HOW THE WORLD EVOLVE
+            {t("sectionLabel")}
           </span>
           <div className="flex items-center gap-4 lg:gap-[18px]">
             <div className="w-8 h-10 sm:w-10 sm:h-12 lg:w-[30px] lg:h-[40px] relative">
               <Image src={imgVector} alt="" fill className="object-contain" />
             </div>
             <h2 className="font-ghavettor text-gradient-silver text-3xl sm:text-4xl lg:text-5xl text-center">
-              Earth Leveling
+              {t("title")}
             </h2>
           </div>
         </div>

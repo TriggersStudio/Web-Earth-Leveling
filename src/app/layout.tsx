@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope, Oswald } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
-import { AppWrapper } from "@/components/app-wrapper";
 import { siteConfig } from "@/config/site";
 
 const geistSans = Geist({
@@ -35,7 +33,6 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   openGraph: {
     type: "website",
-    locale: "fr_FR",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
@@ -43,20 +40,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${oswald.variable} antialiased min-h-screen`}
       >
-        <AppWrapper>
-          {children}
-        </AppWrapper>
-        <Toaster />
+        {children}
       </body>
     </html>
   );

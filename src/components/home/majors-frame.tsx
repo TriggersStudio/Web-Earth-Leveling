@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
-export function MajorsFrame() {
+export async function MajorsFrame() {
+  const t = await getTranslations("Majors");
+
   return (
     <div className="relative w-full sm:px-8 lg:px-16">
       <div
@@ -21,14 +24,14 @@ export function MajorsFrame() {
           <div className="flex items-center gap-2 sm:gap-4">
             <div className="w-6 sm:w-12 lg:w-20 h-px bg-linear-to-r from-transparent to-[#f0f0f0]/40" />
             <h2 className="font-ghavettor text-gradient-silver text-base sm:text-xl lg:text-[40px] text-center">
-              The Majors
+              {t("title")}
             </h2>
             <div className="w-6 sm:w-12 lg:w-20 h-px bg-linear-to-l from-transparent to-[#f0f0f0]/40" />
           </div>
 
           {/* Subtitle */}
           <p className="font-chamberi-display font-bold text-[#848484] text-[6px] sm:text-[8px] lg:text-[12px] text-center tracking-wide uppercase whitespace-nowrap">
-            THE FIRST THREE MAJOR UPDATES OF A LONG SERIES TO COME, PLANNED FOR 2027–2028
+            {t("subtitle")}
           </p>
         </div>
       </div>

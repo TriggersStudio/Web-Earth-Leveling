@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 type FeatureCardProps = {
   title: string[];
@@ -45,34 +46,36 @@ function FeatureCard({ title, description, imageUrl }: FeatureCardProps) {
   );
 }
 
-export function FeaturesSection() {
+export async function FeaturesSection() {
+  const t = await getTranslations("Features");
+
   const featuresRow1 = [
     {
-      title: ["LIVING,", "EVOLVING LORE"],
-      description: "Every action matters. Player decisions, wars, alliances, and discoveries permanently shape the world and its history.",
+      title: [t("feature1Title1"), t("feature1Title2")],
+      description: t("feature1Desc"),
       imageUrl: "/images/feature-1.png",
     },
     {
-      title: ["GUILDS &", "NATIONS AT WAR"],
-      description: "Join or build powerful guilds, serve your nation, conquer territories, and influence global balance through diplomacy or conflict.",
+      title: [t("feature2Title1"), t("feature2Title2")],
+      description: t("feature2Desc"),
       imageUrl: "/images/feature-2.png",
     },
     {
-      title: ["CHOOSE", "YOUR PATH"],
-      description: "Become a Hunter, a Nation Leader, a Scientist, or a strategist in the shadows. Each role offers unique gameplay and impact.",
+      title: [t("feature3Title1"), t("feature3Title2")],
+      description: t("feature3Desc"),
       imageUrl: "/images/feature-3.png",
     },
   ];
 
   const featuresRow2 = [
     {
-      title: ["YOUR REAL", "WORLD LEVELING", "APP"],
-      description: "Train like a Hunter. Earth Leveling features its own Solo Leveling–inspired training app to track progression, challenges, and personal growth beyond the game.",
+      title: [t("feature4Title1"), t("feature4Title2"), t("feature4Title3")],
+      description: t("feature4Desc"),
       imageUrl: "/images/feature-4.png",
     },
     {
-      title: ["AND MUCH MORE", "TO DISCOVER"],
-      description: "Hidden systems, world events, secrets, and evolving mechanics await those who push beyond the limits.",
+      title: [t("feature5Title1"), t("feature5Title2")],
+      description: t("feature5Desc"),
       imageUrl: "/images/feature-5.png",
     },
   ];
@@ -83,7 +86,7 @@ export function FeaturesSection() {
         {/* Title */}
         <div className="flex flex-col items-center gap-2">
           <span className="font-chamberi-display font-bold text-[#8c8c8c] text-sm sm:text-base lg:text-lg tracking-[0.4em] uppercase">
-            EARTH LEVELING
+            {t("sectionLabel")}
           </span>
           <div className="flex items-center gap-4 lg:gap-6">
             <div className="w-10 h-10 lg:w-[45px] lg:h-[40px] relative hidden sm:block">
@@ -95,7 +98,7 @@ export function FeaturesSection() {
               />
             </div>
             <h2 className="font-ghavettor text-gradient-silver text-3xl sm:text-4xl lg:text-5xl text-center">
-              A living World to Conquer
+              {t("title")}
             </h2>
           </div>
         </div>

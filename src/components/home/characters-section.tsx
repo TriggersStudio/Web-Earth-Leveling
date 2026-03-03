@@ -1,8 +1,11 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 const imgCharacter = "/images/character-hero1.png";
 
-export function CharactersSection() {
+export async function CharactersSection() {
+  const t = await getTranslations("Characters");
+
   return (
     <section className="w-full pt-16 lg:pt-28 pb-12 lg:pb-24 px-4 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-[870px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
@@ -11,33 +14,33 @@ export function CharactersSection() {
           {/* Title */}
           <div className="flex flex-col">
             <h2 className="font-ghavettor text-gradient-silver text-3xl sm:text-4xl lg:text-6xl leading-[1.1]">
-              The world&apos;s largest
+              {t("title1")}
             </h2>
             <h2 className="font-ghavettor text-gradient-silver text-3xl sm:text-4xl lg:text-6xl leading-[1.1]">
-              Semi-RP simulation.
+              {t("title2")}
             </h2>
           </div>
 
           {/* Subtitle */}
           <div className="flex flex-col">
             <p className="font-ghavettor text-gradient-silver text-2xl sm:text-3xl lg:text-5xl leading-[1.1]">
-              One world. One server.
+              {t("subtitle1")}
             </p>
             <p className="font-ghavettor text-gradient-silver text-2xl sm:text-3xl lg:text-5xl leading-[1.1]">
-              One shared history.
+              {t("subtitle2")}
             </p>
           </div>
 
           {/* Description paragraphs */}
           <div className="flex flex-col gap-3 lg:gap-4 max-w-[335px]">
             <p className="font-caslon text-[#dbdbdb] text-lg sm:text-xl lg:text-lg">
-              Earth Leveling is a unique world, shared by all players, inspired by Solo Leveling.
+              {t("desc1")}
             </p>
             <p className="font-caslon text-[#dbdbdb] text-lg sm:text-xl lg:text-lg">
-              Nations rise, guilds dominate, and players shape history through wars, alliances, and conquest.
+              {t("desc2")}
             </p>
             <p className="font-caslon text-[#dbdbdb] text-lg sm:text-xl lg:text-lg">
-              Explore a Earth transformed by portals, where power is earned through effort, strategy, and influence, in a persistent experience blending action, progression, and political stakes.
+              {t("desc3")}
             </p>
           </div>
         </div>

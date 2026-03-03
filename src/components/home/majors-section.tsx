@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 type MajorCardProps = {
   title: string;
@@ -64,36 +65,30 @@ function MajorCard({ title, titleImage, descriptions, year, backgroundImage, bor
   );
 }
 
-export function MajorsSection() {
+export async function MajorsSection() {
+  const t = await getTranslations("Majors");
+
   const majors = [
     {
-      title: "Ashes of Awakening",
+      title: t("card1Title"),
       titleImage: "/images/major-title-1.svg",
-      descriptions: [
-        "The first Raids S-Rank Class Dungeons emerge.",
-        "Death is no longer temporary. Some losses scar forever, others erase everything."
-      ],
+      descriptions: [t("card1Desc1"), t("card1Desc2")],
       year: "2027",
       backgroundImage: "/images/major-card-1-bg.png",
       borderColor: "#403948",
     },
     {
-      title: "The Green Ascension",
+      title: t("card2Title"),
       titleImage: "/images/major-title-2.svg",
-      descriptions: [
-        "Advanced renewable technologies emerge.",
-        "Nations that master clean energy gain long-term advantages in production, defense, and sustainability."
-      ],
+      descriptions: [t("card2Desc1"), t("card2Desc2")],
       year: "2028",
       backgroundImage: "/images/major-card-2-bg.png",
       borderColor: "transparent",
     },
     {
-      title: "Echoes of the Moon",
+      title: t("card3Title"),
       titleImage: "/images/major-title-3.svg",
-      descriptions: [
-        "Is the Earth really alone?"
-      ],
+      descriptions: [t("card3Desc1")],
       year: "2028",
       backgroundImage: "/images/major-card-3-bg.png",
       borderColor: "#282f4b",

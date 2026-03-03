@@ -1,8 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ButtonEL } from "@/components/ui/button-el";
+import { getTranslations } from "next-intl/server";
 
-export function PreOrderSection() {
+export async function PreOrderSection() {
+  const t = await getTranslations("PreOrder");
+
   return (
     <section className="w-full py-16 lg:py-24 px-4 sm:px-8 lg:px-16">
       <div className="max-w-[870px] mx-auto flex flex-col lg:flex-row items-stretch justify-center gap-8 lg:gap-[27px]">
@@ -24,7 +27,7 @@ export function PreOrderSection() {
         <div className="flex flex-col items-center justify-center gap-8 lg:gap-10 py-6 lg:py-8">
           <div className="flex flex-col gap-0 items-center justify-center">
             <span className="font-chamberi-display font-bold text-[#dbdbdb] text-base sm:text-lg lg:text-base tracking-wide">
-              COMING SOON (2027)
+              {t("comingSoon")}
             </span>
             <Image
               src="/preorder.svg"
@@ -37,7 +40,7 @@ export function PreOrderSection() {
 
           {/* CTA Button */}
           <Link href="/pre-order">
-            <ButtonEL size="md">LEARN MORE</ButtonEL>
+            <ButtonEL size="md">{t("learnMore")}</ButtonEL>
           </Link>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ButtonEL } from "@/components/ui/button-el";
+import { getTranslations } from "next-intl/server";
 
 type NewsCardProps = {
   title: string;
@@ -45,21 +46,23 @@ function NewsCard({ title, date, imageUrl }: NewsCardProps) {
   );
 }
 
-export function NewsSection() {
+export async function NewsSection() {
+  const t = await getTranslations("News");
+
   const newsItems = [
     {
-      title: "Earth Leveling — A New Era of Semi-RP Simulation Begins",
-      date: "01/02/2026",
+      title: t("article1Title"),
+      date: t("article1Date"),
       imageUrl: "/images/preorder-bg.png",
     },
     {
-      title: "The First Gates Have Been Detected — Hunters, Prepare Yourselves",
-      date: "15/01/2026",
+      title: t("article2Title"),
+      date: t("article2Date"),
       imageUrl: "/images/preorder-bg.png",
     },
     {
-      title: "Nations Rise: How Guilds Will Shape the World's Political Landscape",
-      date: "10/01/2026",
+      title: t("article3Title"),
+      date: t("article3Date"),
       imageUrl: "/images/preorder-bg.png",
     },
   ];
@@ -70,13 +73,12 @@ export function NewsSection() {
         {/* Header */}
         <div className="flex flex-row items-center justify-between gap-4 mb-8 lg:mb-[30px]">
           <h2 className="font-ghavettor text-gradient-silver text-4xl sm:text-5xl lg:text-[56px] leading-none">
-            News
+            {t("title")}
           </h2>
 
-
           {/* CTA Button */}
-          <Link href="/news">
-            <ButtonEL size="md">OUR NEWS</ButtonEL>
+          <Link href="/blog">
+            <ButtonEL size="md">{t("button")}</ButtonEL>
           </Link>
         </div>
 

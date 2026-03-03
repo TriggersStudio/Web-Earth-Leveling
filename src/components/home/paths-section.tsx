@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 // Asset URLs
 const imgVector1 = "/images/paths-vector.png";
@@ -18,70 +19,54 @@ const imgCharacterEngineer = "/images/paths-character3.png";
 const imgCharacterScientist = "/images/paths-character1.png";
 const imgCharacterStrategist = "/images/paths-character4.png";
 
-const roles = [
-  {
-    image: imgEllipse1,
-    characterImage: imgCharacterHunter,
-    name: "Hunter",
-    tagline: "Those who face the inhuman.",
-    descriptions: [
-      "Hunters stand on the front line against Gates, dungeons, and world-level threats. They grow through real combat, high-risk Raids, and constant confrontation with death.",
-      "The greater the danger, the faster the ascent, but failure may carry permanent consequences.",
-    ],
-  },
-  {
-    image: imgEllipse2,
-    characterImage: imgCharacterScientist,
-    name: "Scientist",
-    tagline: "Knowledge shapes the future.",
-    descriptions: [
-      "Scientists study Gates, anomalies, energy systems, and forbidden technologies. Their discoveries unlock new infrastructures, advanced systems, and world-changing innovations.",
-      "Progress comes with responsibility, and sometimes, irreversible consequences.",
-    ],
-  },
-  {
-    image: imgEllipse3,
-    characterImage: imgCharacterEngineer,
-    name: "Engineer",
-    tagline: "Builders of power.",
-    descriptions: [
-      "Engineers turn ideas into reality. They design and maintain infrastructures, energy networks, defenses, and industrial systems. They are also responsible for developing weapons, equipment, and advanced gear used by Hunters on the battlefield.",
-      "Without Engineers, progress stops and wars are lost before they begin.",
-    ],
-  },
-  {
-    image: imgEllipse4,
-    characterImage: imgCharacterLeader,
-    name: "Nation Leader",
-    tagline: "Power comes with responsibility.",
-    descriptions: [
-      "Nation Leaders govern territories, populations, and institutions. They define laws, manage diplomacy, declare wars, and shape national identity.",
-      "Every decision leaves a mark. Prosperity, rebellion, or collapse.",
-    ],
-  },
-  {
-    image: imgEllipse5,
-    characterImage: imgCharacterStrategist,
-    name: "Economic Strategist",
-    tagline: "The art of influence.",
-    descriptions: [
-      "Economic Strategists are masters of long-term dominance. They create and manage companies, control resource flows, shape markets, and influence global development. Through economic planning, corporate power, and discreet espionage, they weaken rivals long before conflict begins.",
-      "Their battlefield is invisible, but decisive.",
-    ],
-  },
-  {
-    image: imgEllipse6,
-    name: "More Paths to Discover",
-    tagline: "Coming Soon",
-    descriptions: [
-      "New specializations, hidden roles, and classified systems will emerge as the world evolves.",
-    ],
-    isMystery: true,
-  },
-];
-
 export function PathsSection() {
+  const t = useTranslations("Paths");
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
+
+  const roles = [
+    {
+      image: imgEllipse1,
+      characterImage: imgCharacterHunter,
+      name: t("hunterName"),
+      tagline: t("hunterTagline"),
+      descriptions: [t("hunterDesc1"), t("hunterDesc2")],
+    },
+    {
+      image: imgEllipse2,
+      characterImage: imgCharacterScientist,
+      name: t("scientistName"),
+      tagline: t("scientistTagline"),
+      descriptions: [t("scientistDesc1"), t("scientistDesc2")],
+    },
+    {
+      image: imgEllipse3,
+      characterImage: imgCharacterEngineer,
+      name: t("engineerName"),
+      tagline: t("engineerTagline"),
+      descriptions: [t("engineerDesc1"), t("engineerDesc2")],
+    },
+    {
+      image: imgEllipse4,
+      characterImage: imgCharacterLeader,
+      name: t("leaderName"),
+      tagline: t("leaderTagline"),
+      descriptions: [t("leaderDesc1"), t("leaderDesc2")],
+    },
+    {
+      image: imgEllipse5,
+      characterImage: imgCharacterStrategist,
+      name: t("strategistName"),
+      tagline: t("strategistTagline"),
+      descriptions: [t("strategistDesc1"), t("strategistDesc2")],
+    },
+    {
+      image: imgEllipse6,
+      name: t("mysteryName"),
+      tagline: t("mysteryTagline"),
+      descriptions: [t("mysteryDesc")],
+      isMystery: true,
+    },
+  ];
 
   const activeRole = activeIndex !== null ? roles[activeIndex] : null;
 
@@ -95,11 +80,11 @@ export function PathsSection() {
               <Image src={imgVector1} alt="" fill className="object-contain" />
             </div>
             <h2 className="font-ghavettor text-gradient-silver text-2xl sm:text-3xl lg:text-5xl text-center">
-              Multiple paths. One destiny
+              {t("title")}
             </h2>
           </div>
           <span className="font-chamberi-display font-bold text-[#8c8c8c] text-xs sm:text-sm lg:text-base tracking-[0.3em] uppercase">
-            WHAT WILL YOURS BE
+            {t("subtitle")}
           </span>
         </div>
 
@@ -107,7 +92,7 @@ export function PathsSection() {
         <div className="flex items-center gap-3 lg:gap-6">
           <div className="w-10 sm:w-14 lg:w-[74px] h-px bg-linear-to-r from-transparent to-[#f0f0f0]" />
           <span className="font-caslon text-[#f0f0f0] text-xs sm:text-sm lg:text-sm tracking-wider text-center">
-            A second specialization is possible, but progression will be slower.
+            {t("note")}
           </span>
           <div className="w-10 sm:w-14 lg:w-[74px] h-px bg-linear-to-l from-transparent to-[#f0f0f0]" />
         </div>
@@ -140,7 +125,7 @@ export function PathsSection() {
                 fill
                 className="object-contain relative z-10"
               />
-              {role.isMystery && (
+              {"isMystery" in role && role.isMystery && (
                 <div className="absolute inset-0 flex items-center justify-center z-10">
                   <span className="font-qindret text-[#787878] text-2xl lg:text-4xl">?</span>
                 </div>
@@ -178,11 +163,11 @@ export function PathsSection() {
               </div>
 
               {/* Right - Character Image */}
-              {(activeRole.characterImage || activeRole.isMystery) && (
+              {(("characterImage" in activeRole && activeRole.characterImage) || ("isMystery" in activeRole && activeRole.isMystery)) && (
                 <div className="flex-1 flex justify-center lg:justify-center lg:-ml-50 animate-[fadeInUp_0.4s_ease-out_0.15s_both]">
                   <div className="relative w-[351px] h-[478px] max-w-xs lg:max-w-4xl">
                     <Image
-                      src={activeRole.characterImage || imgImage8}
+                      src={("characterImage" in activeRole && activeRole.characterImage) || imgImage8}
                       alt={activeRole.name}
                       fill
                       className="object-cover"

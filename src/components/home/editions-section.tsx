@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const editionVariants = {
   STANDARD: {
@@ -40,55 +41,6 @@ const editionVariants = {
 } as const;
 
 type EditionVariant = keyof typeof editionVariants;
-
-// Edition card data
-const editionCards: Record<EditionVariant, {
-  title: string;
-  features: string[];
-  cardGradient: string;
-  borderColor: string;
-  previewImage: string;
-}> = {
-  STANDARD: {
-    title: "Standard Edition",
-    features: [
-      "SOON",
-    ],
-    cardGradient: "linear-gradient(to bottom, #123161, #041126)",
-    borderColor: "#385989",
-    previewImage: "/images/edition-card-preview.png",
-  },
-  HUNTER: {
-    title: "Hunter Edition",
-    features: [
-      "SOON",
-
-    ],
-    cardGradient: "linear-gradient(to bottom, #123161, #041126)",
-    borderColor: "#385989",
-    previewImage: "/images/edition-card-preview.png",
-  },
-  NATION: {
-    title: "Nation Edition",
-    features: [
-      "SOON",
-
-    ],
-    cardGradient: "linear-gradient(to bottom, #123161, #041126)",
-    borderColor: "#385989",
-    previewImage: "/images/edition-card-preview.png",
-  },
-  MONARCH: {
-    title: "Monarch Edition",
-    features: [
-      "SOON",
-
-    ],
-    cardGradient: "linear-gradient(to bottom, #123161, #041126)",
-    borderColor: "#385989",
-    previewImage: "/images/edition-card-preview.png",
-  },
-};
 
 type EditionButtonProps = {
   label: string;
@@ -159,7 +111,40 @@ function EditionButton({ label, variant, isActive = false, onClick }: EditionBut
 }
 
 export function EditionsSection() {
+  const t = useTranslations("Editions");
   const [selectedEdition, setSelectedEdition] = useState<EditionVariant>("STANDARD");
+
+  const editionCards: Record<EditionVariant, {
+    title: string;
+    features: string[];
+    borderColor: string;
+    previewImage: string;
+  }> = {
+    STANDARD: {
+      title: t("standard"),
+      features: [t("soon")],
+      borderColor: "#385989",
+      previewImage: "/images/edition-card-preview.png",
+    },
+    HUNTER: {
+      title: t("hunter"),
+      features: [t("soon")],
+      borderColor: "#385989",
+      previewImage: "/images/edition-card-preview.png",
+    },
+    NATION: {
+      title: t("nation"),
+      features: [t("soon")],
+      borderColor: "#385989",
+      previewImage: "/images/edition-card-preview.png",
+    },
+    MONARCH: {
+      title: t("monarch"),
+      features: [t("soon")],
+      borderColor: "#385989",
+      previewImage: "/images/edition-card-preview.png",
+    },
+  };
 
   const currentCard = editionCards[selectedEdition];
 
@@ -198,10 +183,10 @@ export function EditionsSection() {
               {/* Titles */}
               <div className="flex flex-col items-center lg:items-start">
                 <p className="font-chamberi-display font-bold text-[#808080] text-sm sm:text-base lg:text-lg text-center lg:text-left leading-tight">
-                  SELECT THE EDITION
+                  {t("selectEdition")}
                 </p>
                 <p className="font-chamberi-display font-bold text-[#f0f0f0] text-lg sm:text-xl lg:text-2xl text-center lg:text-left leading-tight">
-                  PRE-ORDER (MID 2026)
+                  {t("preOrder")}
                 </p>
               </div>
 
@@ -216,7 +201,7 @@ export function EditionsSection() {
                       onClick={() => setSelectedEdition("STANDARD")}
                     />
                     <div className="absolute -top-2 -right-2 bg-emerald-500/90 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full leading-none tracking-wider shadow-lg">
-                      FREE
+                      {t("free")}
                     </div>
                   </div>
                   <EditionButton
@@ -246,7 +231,7 @@ export function EditionsSection() {
             {/* Coming Soon Section */}
             <div className="flex flex-col gap-4 items-center w-full">
               <p className="font-chamberi-display font-bold text-[#f0f0f0] text-base sm:text-lg lg:text-xl text-center lg:text-left leading-tight">
-                COMING SOON ON
+                {t("comingSoonOn")}
               </p>
               <div className="relative w-[124px] sm:w-[160px] lg:w-[124px] h-[63px] sm:h-[80px] lg:h-[63px]" style={{ filter: "drop-shadow(0px 0px 100px rgba(0,0,0,0.6))" }}>
                 <Image

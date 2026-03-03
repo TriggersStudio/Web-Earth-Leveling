@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 // Asset URLs
 const imgTitleIcon = "/images/open-world-title-icon.svg";
@@ -63,16 +64,18 @@ function Card({ imageUrl, title, description }: CardProps) {
   );
 }
 
-export function OpenWorldSection() {
+export async function OpenWorldSection() {
+  const t = await getTranslations("OpenWorld");
+
   const cardsRow1 = [
-    { imageUrl: "/images/open-world-card-1.png", title: "Your Growth Defines Your Rank", description: "Your actions, training, and choices shape your progression. There are no fixed paths — power is earned, not given." },
-    { imageUrl: "/images/open-world-card-2.png", title: "Every Decision Has Consequences", description: "Alliances, betrayals, wars, and sacrifices permanently affect your character and the world around you." },
-    { imageUrl: "/images/open-world-card-3.png", title: "Learn Through Exploration", description: "Power comes from experience, discovery, and risk. The more you dare, the further you evolve." },
+    { imageUrl: "/images/open-world-card-1.png", title: t("card1Title"), description: t("card1Desc") },
+    { imageUrl: "/images/open-world-card-2.png", title: t("card2Title"), description: t("card2Desc") },
+    { imageUrl: "/images/open-world-card-3.png", title: t("card3Title"), description: t("card3Desc") },
   ];
 
   const cardsRow2 = [
-    { imageUrl: "/images/open-world-card-4.png", title: "Shape Your Role in the World", description: "Hunter, Leader, Scientist and much more. Your progression continues beyond the game through the Earth Leveling mobile app." },
-    { imageUrl: "/images/open-world-card-5.png", title: "A World Without Language Barriers", description: "Local proximity chat is automatically translated in real time, allowing players from all nations to interact naturally. English remains the shared international language for voice communication between different parties." },
+    { imageUrl: "/images/open-world-card-4.png", title: t("card4Title"), description: t("card4Desc") },
+    { imageUrl: "/images/open-world-card-5.png", title: t("card5Title"), description: t("card5Desc") },
   ];
 
   const allCards = [...cardsRow1, ...cardsRow2];
@@ -88,13 +91,13 @@ export function OpenWorldSection() {
               <Image src={imgTitleIcon} alt="" fill className="object-contain" />
             </div>
             <h2 className="font-ghavettor text-gradient-silver text-xl sm:text-2xl lg:text-5xl text-center">
-              The Largest Semi-RP UGC Open World
+              {t("title")}
             </h2>
           </div>
 
           {/* Subtitle */}
           <span className="font-chamberi-display font-bold text-[#8c8c8c] text-xs sm:text-sm lg:text-sm tracking-[0.3em] lg:tracking-[0.4em] uppercase text-center">
-            YES, YES! THE BIGGEST ONE
+            {t("subtitle")}
           </span>
         </div>
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { setRequestLocale } from "next-intl/server";
 import {
   Navbar,
   HeroSection,
@@ -26,11 +27,17 @@ function CloudBackground({ className }: { className?: string }) {
   );
 }
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <div className="relative min-h-screen bg-[#030912] overflow-x-hidden">
       <SocialSidebar />
-
       <SupportBar />
       <Navbar />
 
