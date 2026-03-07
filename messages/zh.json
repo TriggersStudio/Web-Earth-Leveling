@@ -231,6 +231,23 @@
     "dataOverview": "您的数据概览",
     "statsComingSoon": "统计功能即将推出"
   },
+  "WorldIntro": {
+    "slide1Title": "欢迎来到世界",
+    "slide1Desc": "这个互动地球仪实时展示Earth Leveling的世界。探索领土、追踪活跃的传送门，并监控各国之间的全球紧张局势。",
+    "slide2Title": "传送门",
+    "slide2Desc": "传送门是出现在世界各地的次元入口。它们按危险等级从E到S进行分类。猎人必须在它们溢出并摧毁周围领土之前将其关闭。",
+    "slide3Title": "紧张局势",
+    "slide3Desc": "紧张局势代表各国之间当前的地缘政治冲突水平。高度紧张可能导致战争、领土变更和联盟变动，从而重塑世界地图。",
+    "slide4Title": "国家与领土",
+    "slide4Desc": "地球上的每个国家都是可游玩的领土。国家由玩家治理，拥有自己的法律、军队和外交关系。将鼠标悬停在任何领土上可查看详情。",
+    "slide5Title": "排名与力量",
+    "slide5Desc": "世界格局不断变化。通过全球排名系统追踪最强大的国家、公会和猎人。你的行动直接影响这些排名。",
+    "back": "返回",
+    "next": "下一步",
+    "finish": "完成",
+    "skip": "跳过介绍",
+    "dontShowAgain": "不再显示"
+  },
   "LanguageSwitcher": {
     "en": "English",
     "fr": "Français",

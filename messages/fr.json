@@ -231,6 +231,23 @@
     "dataOverview": "Aperçu de vos données",
     "statsComingSoon": "Les statistiques seront disponibles prochainement"
   },
+  "WorldIntro": {
+    "slide1Title": "Bienvenue dans le Monde",
+    "slide1Desc": "Ce globe interactif représente le monde d'Earth Leveling en temps réel. Explorez les territoires, suivez les Gates actives et surveillez les tensions mondiales entre nations.",
+    "slide2Title": "Gates",
+    "slide2Desc": "Les Gates sont des portails dimensionnels qui apparaissent à travers le monde. Elles sont classées de E à S selon leur niveau de danger. Les Hunters doivent les refermer avant qu'elles ne débordent et dévastent les territoires environnants.",
+    "slide3Title": "Tensions",
+    "slide3Desc": "Les tensions représentent le niveau actuel de conflit géopolitique entre nations. Des tensions élevées peuvent mener à des guerres, des changements de territoire et des alliances mouvantes qui redessinent la carte du monde.",
+    "slide4Title": "Nations & Territoires",
+    "slide4Desc": "Chaque pays sur le globe est un territoire jouable. Les nations sont gouvernées par les joueurs, avec leurs propres lois, armées et relations diplomatiques. Survolez un territoire pour voir ses détails.",
+    "slide5Title": "Classements & Puissance",
+    "slide5Desc": "L'équilibre mondial est en constante évolution. Suivez les nations, guildes et hunters les plus puissants via le système de classement global. Vos actions influencent directement ces classements.",
+    "back": "RETOUR",
+    "next": "SUIVANT",
+    "finish": "TERMINER",
+    "skip": "PASSER L'INTRODUCTION",
+    "dontShowAgain": "Ne plus afficher"
+  },
   "LanguageSwitcher": {
     "en": "English",
     "fr": "Français",

@@ -231,6 +231,23 @@
     "dataOverview": "Overview of your data",
     "statsComingSoon": "Statistics will be available soon"
   },
+  "WorldIntro": {
+    "slide1Title": "Welcome to the World",
+    "slide1Desc": "This interactive globe represents the Earth Leveling world in real time. Explore territories, track active Gates, and monitor global tensions between nations.",
+    "slide2Title": "Gates",
+    "slide2Desc": "Gates are dimensional portals that spawn across the world. They are ranked from E to S based on danger level. Hunters must clear them before they overflow and devastate surrounding territories.",
+    "slide3Title": "Tensions",
+    "slide3Desc": "Tensions represent the current level of geopolitical conflict between nations. High tensions can lead to wars, territory changes, and shifting alliances that reshape the world map.",
+    "slide4Title": "Nations & Territories",
+    "slide4Desc": "Each country on the globe is a playable territory. Nations are governed by players, with their own laws, armies, and diplomatic relations. Hover over any territory to see its details.",
+    "slide5Title": "Rankings & Power",
+    "slide5Desc": "The world balance is constantly shifting. Track the most powerful nations, guilds, and hunters through the global ranking system. Your actions directly influence these rankings.",
+    "back": "BACK",
+    "next": "NEXT",
+    "finish": "FINISH",
+    "skip": "SKIP INTRODUCTION",
+    "dontShowAgain": "Don't show again"
+  },
   "LanguageSwitcher": {
     "en": "English",
     "fr": "Français",

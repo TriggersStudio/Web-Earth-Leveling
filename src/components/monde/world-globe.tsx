@@ -17,14 +17,19 @@ interface CountryFeature {
   geometry: unknown;
 }
 
-const EARTH_IMG = "/images/earth-night.jpg";
+const EARTH_IMG = "/images/earth-blue-marble.jpg";
 const BUMP_IMG = "/images/earth-topology.png";
-const STARS_IMG = "/images/night-sky.png";
 const CLOUDS_IMG = "/images/earth-clouds.png";
+const NIGHT_IMG = "/images/earth-night.jpg";
 const CLOUDS_ALT = 0.004;
-const CLOUDS_ROTATION_SPEED = -0.006; // degrees per frame
+const CLOUDS_ROTATION_SPEED = -0.006;
 
-export function WorldGlobe() {
+
+interface WorldGlobeProps {
+  onCountryClick?: (name: string, pos: { x: number; y: number }) => void;
+}
+
+export function WorldGlobe({ onCountryClick }: WorldGlobeProps) {
   const t = useTranslations("World");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const globeRef = useRef<any>(null);
@@ -32,6 +37,8 @@ export function WorldGlobe() {
   const starMeshRef = useRef<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const cloudMeshRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const glowMeshRef = useRef<any>(null);
   const animFrameRef = useRef<number>(0);
   const setupDone = useRef(false);
   const [countries, setCountries] = useState<CountryFeature[]>([]);
@@ -40,13 +47,11 @@ export function WorldGlobe() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
 
-  // Auto-dismiss loading screen after 3s max (dev mode is slow due to Turbopack)
   useEffect(() => {
     const timer = setTimeout(() => setShowLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
-  // Responsive sizing
   useEffect(() => {
     const update = () =>
       setDimensions({ width: window.innerWidth, height: window.innerHeight });
@@ -55,22 +60,19 @@ export function WorldGlobe() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Warm browser cache for textures (low-priority, after JS)
   useEffect(() => {
-    [EARTH_IMG, BUMP_IMG, STARS_IMG, CLOUDS_IMG].forEach((src) => {
+    [EARTH_IMG, BUMP_IMG, CLOUDS_IMG, NIGHT_IMG].forEach((src) => {
       const img = new Image();
       img.src = src;
     });
   }, []);
 
-  // Fetch country data
   useEffect(() => {
     fetch("/data/countries.geojson")
       .then((r) => r.json())
       .then((d) => setCountries(d.features));
   }, []);
 
-  // Setup globe once ref is available
   useEffect(() => {
     const globe = globeRef.current;
     if (!globe || setupDone.current) return;
@@ -83,7 +85,7 @@ export function WorldGlobe() {
     controls.maxDistance = 500;
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
-    globe.pointOfView({ lat: 25, lng: 10, altitude: 2.2 }, 0);
+    globe.pointOfView({ lat: 20, lng: 10, altitude: 2.2 }, 0);
 
     setIsLoaded(true);
 
@@ -93,14 +95,31 @@ export function WorldGlobe() {
     import("three").then((THREE) => {
       const loader = new THREE.TextureLoader();
 
+      // Better lighting
+      // Remove default lights and add custom ones
+      scene.children
+        .filter((c: { type: string }) => c.type === "DirectionalLight" || c.type === "AmbientLight")
+        .forEach((l: { intensity: number }) => { l.intensity = 0; });
+
+      const ambientLight = new THREE.AmbientLight(0x334466, 1.2);
+      scene.add(ambientLight);
+
+      const sunLight = new THREE.DirectionalLight(0xfff5e6, 1.8);
+      sunLight.position.set(-2, 0.5, 1.5);
+      scene.add(sunLight);
+
+      const fillLight = new THREE.DirectionalLight(0x4466aa, 0.4);
+      fillLight.position.set(2, -1, -1);
+      scene.add(fillLight);
+
       // Stars
-      const starGeo = new THREE.SphereGeometry(900, 64, 64);
-      loader.load(STARS_IMG, (tex) => {
+      const starGeo = new THREE.SphereGeometry(1000, 32, 32);
+      loader.load("/images/night-sky.png", (tex) => {
         const mat = new THREE.MeshBasicMaterial({
           map: tex,
           side: THREE.BackSide,
           transparent: true,
-          opacity: 0.25,
+          opacity: 0.5,
         });
         const mesh = new THREE.Mesh(starGeo, mat);
         scene.add(mesh);
@@ -110,40 +129,83 @@ export function WorldGlobe() {
       // Clouds
       const cloudGeo = new THREE.SphereGeometry(
         globe.getGlobeRadius() * (1 + CLOUDS_ALT),
-        75,
-        75
+        40,
+        40
       );
       loader.load(CLOUDS_IMG, (tex) => {
         const mat = new THREE.MeshPhongMaterial({
           map: tex,
           transparent: true,
-          opacity: 0.8,
+          opacity: 0.35,
+          depthWrite: false,
         });
         const mesh = new THREE.Mesh(cloudGeo, mat);
         scene.add(mesh);
         cloudMeshRef.current = mesh;
       });
 
+      // Outer glow halo (fresnel-like)
+      const glowRadius = globe.getGlobeRadius() * 1.15;
+      const glowGeo = new THREE.SphereGeometry(glowRadius, 32, 32);
+      const glowMat = new THREE.ShaderMaterial({
+        uniforms: {
+          glowColor: { value: new THREE.Color(0x6633cc) },
+          viewVector: { value: new THREE.Vector3(0, 0, 1) },
+        },
+        vertexShader: `
+          uniform vec3 viewVector;
+          varying float intensity;
+          void main() {
+            vec3 vNormal = normalize(normalMatrix * normal);
+            vec3 vNormel = normalize(normalMatrix * viewVector);
+            intensity = pow(0.65 - dot(vNormal, vNormel), 3.0);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 glowColor;
+          varying float intensity;
+          void main() {
+            vec3 glow = glowColor * intensity;
+            gl_FragColor = vec4(glow, intensity * 0.6);
+          }
+        `,
+        side: THREE.FrontSide,
+        blending: THREE.AdditiveBlending,
+        transparent: true,
+        depthWrite: false,
+      });
+      const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+      scene.add(glowMesh);
+      glowMeshRef.current = glowMesh;
+
       // Animate
       const animate = () => {
-        if (starMeshRef.current) starMeshRef.current.rotation.y += 0.00015;
+        if (starMeshRef.current) starMeshRef.current.rotation.y += 0.0001;
         if (cloudMeshRef.current)
           cloudMeshRef.current.rotation.y +=
             (CLOUDS_ROTATION_SPEED * Math.PI) / 180;
+
+        // Update glow view vector from camera
+        if (glowMeshRef.current && globe.camera()) {
+          const cam = globe.camera();
+          glowMeshRef.current.material.uniforms.viewVector.value =
+            new THREE.Vector3().subVectors(cam.position, glowMeshRef.current.position);
+        }
+
         animFrameRef.current = requestAnimationFrame(animate);
       };
       animate();
     });
   });
 
-  // Cleanup
   useEffect(() => {
     return () => {
       cancelAnimationFrame(animFrameRef.current);
-      [starMeshRef, cloudMeshRef].forEach((ref) => {
+      [starMeshRef, cloudMeshRef, glowMeshRef].forEach((ref) => {
         if (ref.current) {
-          ref.current.geometry.dispose();
-          ref.current.material.dispose();
+          ref.current.geometry?.dispose();
+          ref.current.material?.dispose();
           ref.current = null;
         }
       });
@@ -154,12 +216,19 @@ export function WorldGlobe() {
     setHoverD(d as CountryFeature | null);
   }, []);
 
+  const handlePolygonClick = useCallback((d: object, event: MouseEvent) => {
+    const feature = d as CountryFeature;
+    if (feature?.properties?.NAME && onCountryClick) {
+      onCountryClick(feature.properties.NAME, { x: event.clientX, y: event.clientY });
+    }
+  }, [onCountryClick]);
+
   const w = dimensions.width || 1;
   const h = dimensions.height || 1;
 
   return (
     <>
-      {/* Loading overlay — hides when globe is ready OR after 3s max */}
+      {/* Loading overlay */}
       <div
         className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#030912] transition-opacity duration-1000 ${
           isLoaded || !showLoading ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -173,53 +242,56 @@ export function WorldGlobe() {
         </div>
       </div>
 
-      {/* Globe fades in independently */}
       <div className={`transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
-
-      <GlobeGL
-        ref={globeRef}
-        width={w}
-        height={h}
-        globeImageUrl={EARTH_IMG}
-        bumpImageUrl={BUMP_IMG}
-        polygonsData={countries}
-        polygonAltitude={(d) => (d === hoverD ? 0.04 : 0.006)}
-        polygonCapColor={(d) =>
-          d === hoverD
-            ? "rgba(194, 159, 255, 0.35)"
-            : "rgba(200, 200, 214, 0.06)"
-        }
-        polygonSideColor={() => "rgba(194, 159, 255, 0.15)"}
-        polygonStrokeColor={() => "rgba(194, 159, 255, 0.2)"}
-        polygonLabel={(d: object) => {
-          const feature = d as CountryFeature;
-          return `
-            <div style="
-              background: rgba(4, 12, 23, 0.92);
-              backdrop-filter: blur(16px);
-              -webkit-backdrop-filter: blur(16px);
-              border: 1px solid rgba(194, 159, 255, 0.25);
-              border-radius: 10px;
-              padding: 10px 16px;
-              color: #e6e6e6;
-              font-size: 14px;
-              font-weight: 600;
-              letter-spacing: 0.05em;
-              box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-              pointer-events: none;
-            ">
-              <span style="color: #C29FFF; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 2px;">
-                ${t("territory")}
-              </span>
-              ${feature.properties.NAME}
-            </div>
-          `;
-        }}
-        onPolygonHover={handlePolygonHover}
-        atmosphereColor="rgba(100, 60, 180, 1)"
-        atmosphereAltitude={0.18}
-        animateIn={true}
-      />
+        <GlobeGL
+          ref={globeRef}
+          width={w}
+          height={h}
+          globeImageUrl={EARTH_IMG}
+          bumpImageUrl={BUMP_IMG}
+          polygonsData={countries}
+          polygonAltitude={(d) => (d === hoverD ? 0.035 : 0.005)}
+          polygonCapColor={(d) =>
+            d === hoverD
+              ? "rgba(163, 102, 255, 0.45)"
+              : "rgba(180, 180, 200, 0.05)"
+          }
+          polygonSideColor={(d) =>
+            d === hoverD
+              ? "rgba(163, 102, 255, 0.3)"
+              : "rgba(163, 102, 255, 0.08)"
+          }
+          polygonStrokeColor={() => "rgba(163, 102, 255, 0.15)"}
+          polygonLabel={(d: object) => {
+            const feature = d as CountryFeature;
+            return `
+              <div style="
+                background: rgba(4, 12, 23, 0.92);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(163, 102, 255, 0.3);
+                padding: 10px 16px;
+                color: #e6e6e6;
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.05em;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(163,102,255,0.1);
+                pointer-events: none;
+              ">
+                <span style="color: #C29FFF; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 3px;">
+                  ${t("territory")}
+                </span>
+                ${feature.properties.NAME}
+              </div>
+            `;
+          }}
+          onPolygonClick={handlePolygonClick}
+          onPolygonHover={handlePolygonHover}
+          // Atmosphere
+          atmosphereColor="rgba(80, 40, 160, 1)"
+          atmosphereAltitude={0.2}
+          animateIn={true}
+        />
       </div>
     </>
   );
