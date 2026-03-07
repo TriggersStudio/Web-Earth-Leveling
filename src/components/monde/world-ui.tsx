@@ -21,7 +21,6 @@ function WorldUIInner() {
     selectedCountry,
     showEvents,
     showPanel,
-    clickPos,
     selectCountry,
     openPanel,
     closeEvents,
@@ -86,13 +85,12 @@ function WorldUIInner() {
       {/* Markets - Mobile (drawer controlled by stats bar) */}
       <WorldMobileMarkets open={marketsOpen} onClose={() => setMarketsOpen(false)} />
 
-      {/* Country Events - Desktop (follows click position) */}
-      {selectedCountry && showEvents && clickPos && (
+      {/* Country Events - Desktop (centered) */}
+      {selectedCountry && showEvents && (
         <WorldCountryEvents
           country={selectedCountry}
           onClose={closeEvents}
           onViewDetails={openPanel}
-          position={clickPos}
         />
       )}
 

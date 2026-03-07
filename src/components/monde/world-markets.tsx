@@ -69,7 +69,7 @@ export function WorldMarkets() {
 
   return (
     <div
-      className="fixed top-[230px] right-[70px] z-40 w-[320px] hidden lg:flex flex-col bg-[rgba(5,26,56,0.5)] border-[0.605px] border-solid overflow-hidden"
+      className="fixed top-[230px] right-[70px] z-40 w-[320px] hidden lg:flex flex-col bg-[rgba(5,26,56,0.75)] border-[0.605px] border-solid overflow-hidden"
       style={{ borderImage: "linear-gradient(180deg, #385989 0%, #031022 100%) 1" }}
     >
       {/* Header */}

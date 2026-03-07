@@ -104,24 +104,15 @@ interface Props {
   country: CountryData;
   onClose: () => void;
   onViewDetails: () => void;
-  position: { x: number; y: number };
 }
 
-export function WorldCountryEvents({ country, onClose, onViewDetails, position }: Props) {
+export function WorldCountryEvents({ country, onClose, onViewDetails }: Props) {
   const ts = TENSION_STYLES[country.tension];
-
-  // Clamp position so modal stays visible
-  const modalW = 334;
-  const modalH = 380;
-  const x = Math.min(Math.max(position.x - modalW / 2, 10), window.innerWidth - modalW - 10);
-  const y = Math.min(Math.max(position.y - modalH / 2, 70), window.innerHeight - modalH - 50);
 
   return (
     <div
-      className="fixed z-50 w-[334px] bg-[rgba(5,26,56,0.85)] backdrop-blur-sm hidden lg:flex flex-col gap-5 p-5 overflow-hidden border-[0.4px] border-solid"
+      className="fixed z-50 w-[334px] bg-[rgba(5,26,56,0.85)] backdrop-blur-sm hidden lg:flex flex-col gap-5 p-5 overflow-hidden border-[0.4px] border-solid top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       style={{
-        left: x,
-        top: y,
         borderImage: "linear-gradient(180deg, #385989 0%, #031022 100%) 1",
       }}
     >
