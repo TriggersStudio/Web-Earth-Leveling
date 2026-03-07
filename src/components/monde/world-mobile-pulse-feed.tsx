@@ -32,8 +32,8 @@ const CATEGORY_STYLES: Record<Category, { bg: string; border: string; text: stri
 const MOCK_FEED: FeedItem[] = [
   {
     id: 1,
-    title: "Gate de rang S detectee a Seoul — Mobilisation mondiale des Hunters",
-    description: "Une Gate de rang S vient d'apparaitre dans le centre de Seoul. Les guildes internationales sont en alerte maximale.",
+    title: "S-Rank Gate detected in Seoul — Worldwide Hunter mobilization",
+    description: "An S-Rank Gate has appeared in central Seoul. International guilds are on maximum alert.",
     severity: "HIGH",
     categories: ["GATES"],
     countryFlag: "\u{1F1F0}\u{1F1F7}",
@@ -41,8 +41,8 @@ const MOCK_FEED: FeedItem[] = [
   },
   {
     id: 2,
-    title: "Alliance Franco-Allemande renforcee apres le sommet de Berlin",
-    description: "Les deux nations ont signe un accord de defense mutuelle contre les menaces de Gates transfrontalieres.",
+    title: "Franco-German Alliance strengthened after Berlin summit",
+    description: "Both nations signed a mutual defense pact against cross-border Gate threats.",
     severity: "MEDIUM",
     categories: ["POLITICS", "WAR"],
     countryFlag: "\u{1F1EB}\u{1F1F7}",
@@ -50,8 +50,8 @@ const MOCK_FEED: FeedItem[] = [
   },
   {
     id: 3,
-    title: "Krach boursier a Tokyo suite a l'apparition de 5 Gates simultanees",
-    description: "Les marches asiatiques chutent de 8% apres l'ouverture de Gates multiples sur l'archipel japonais.",
+    title: "Stock market crash in Tokyo after 5 simultaneous Gates appear",
+    description: "Asian markets plunge 8% following the opening of multiple Gates across the Japanese archipelago.",
     severity: "MEDIUM",
     categories: ["STOCK MARKET"],
     countryFlag: "\u{1F1EF}\u{1F1F5}",
