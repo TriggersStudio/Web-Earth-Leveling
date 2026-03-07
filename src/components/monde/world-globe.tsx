@@ -136,7 +136,7 @@ export function WorldGlobe({ onCountryClick }: WorldGlobeProps) {
         const mat = new THREE.MeshPhongMaterial({
           map: tex,
           transparent: true,
-          opacity: 0.35,
+          opacity: 1,
           depthWrite: false,
         });
         const mesh = new THREE.Mesh(cloudGeo, mat);
@@ -230,9 +230,8 @@ export function WorldGlobe({ onCountryClick }: WorldGlobeProps) {
     <>
       {/* Loading overlay */}
       <div
-        className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#030912] transition-opacity duration-1000 ${
-          isLoaded || !showLoading ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
+        className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#030912] transition-opacity duration-1000 ${isLoaded || !showLoading ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
       >
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-2 border-[#C29FFF]/30 border-t-[#C29FFF] rounded-full animate-spin" />

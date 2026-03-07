@@ -74,7 +74,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-[50px] left-0 right-0 w-full py-3 px-4 sm:px-6 lg:px-12 z-50 transition-all duration-300 ${isScrolled ? "bg-black/50 backdrop-blur-md" : "bg-gradient-to-b from-black/40 to-transparent"}`}>
+      <nav className={`fixed top-[50px] left-0 right-0 w-full py-3 px-4 sm:px-6 lg:px-12 z-[60] transition-all duration-300 ${isScrolled ? "bg-black/50 backdrop-blur-md" : "bg-gradient-to-b from-black/90 via-black/60 to-transparent"}`}>
         <div className="max-w-6xl mx-auto flex items-center justify-between lg:justify-center lg:gap-[90px]">
           <Link href="/" className="flex items-center shrink-0">
             <div className="w-28 h-12 sm:w-34 sm:h-[56px] lg:w-[125px] lg:h-[54px] relative">
@@ -147,7 +147,7 @@ export function Navbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-40 bg-[#030912]/95 backdrop-blur-xl lg:hidden overflow-y-auto transition-all duration-500 ease-out ${isMenuOpen
+        className={`fixed inset-0 z-[55] bg-[#030912]/95 backdrop-blur-xl lg:hidden overflow-y-auto transition-all duration-500 ease-out ${isMenuOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
           }`}

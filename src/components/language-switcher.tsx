@@ -37,7 +37,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean } = {}
   }
 
   return (
-    <div className="relative z-1000" ref={dropdownRef}>
+    <div className="relative z-[1000]" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center cursor-pointer hover:opacity-80 transition-opacity ${compact ? "gap-1.5" : "gap-3"}`}
@@ -57,7 +57,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean } = {}
       </button>
 
       {isOpen && (
-        <div className={`absolute right-0 w-[180px] z-3000 rounded-lg border border-white/10 bg-[#0a1222]/95 backdrop-blur-xl shadow-xl overflow-hidden ${compact ? "top-full mt-2" : "bottom-full mb-2"}`}>
+        <div className={`absolute right-0 w-[180px] z-[3000] rounded-lg border border-white/10 bg-[#0a1222]/95 backdrop-blur-xl shadow-xl overflow-hidden ${compact ? "top-full mt-2" : "bottom-full mb-2"}`}>
           <div className="py-1">
             {routing.locales.map((l) => (
               <button

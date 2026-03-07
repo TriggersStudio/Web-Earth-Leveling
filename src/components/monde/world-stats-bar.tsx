@@ -54,7 +54,7 @@ export function WorldStatsBar({ onPulseClick }: WorldStatsBarProps) {
 
   return (
     <div
-      className="fixed top-[120px] left-4 lg:top-[178px] lg:left-1/2 lg:-translate-x-1/2 z-40 flex items-stretch bg-gradient-to-b from-[#051a38] to-[#031022] border-[0.781px] border-solid"
+      className="fixed top-[168px] left-4 lg:top-[178px] lg:left-1/2 lg:-translate-x-1/2 z-40 flex items-stretch bg-gradient-to-b from-[#051a38] to-[#031022] border-[0.781px] border-solid"
       style={{ borderImage: "linear-gradient(180deg, #385989 0%, #031022 100%) 1" }}
     >
       {/* Pulse section — mobile only */}

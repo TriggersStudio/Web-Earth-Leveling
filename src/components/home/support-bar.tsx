@@ -132,7 +132,7 @@ export function SupportBar() {
     : "LEVELING FM";
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] w-full bg-black border-b border-white/10 h-[50px] px-4 sm:px-8 lg:px-[136px] flex items-center">
+    <div className="fixed top-0 left-0 right-0 z-[70] w-full bg-black border-b border-white/10 h-[50px] px-4 sm:px-8 lg:px-[136px] flex items-center">
       <div className="flex items-center justify-between w-full max-w-[1008px] mx-auto">
         {/* Left spacer */}
         <div className="flex-1 h-[23px]" />

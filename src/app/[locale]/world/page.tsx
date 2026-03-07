@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Navbar, SupportBar, SocialSidebar } from "@/components/home";
 import { WorldUI } from "@/components/monde/world-ui";
-import { Countdown } from "@/components/ui/countdown";
-
-const isDev = process.env.NODE_ENV === "development";
 
 export async function generateMetadata({
   params,
@@ -26,18 +23,6 @@ export default async function WorldPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: "World" });
-
-  if (!isDev) {
-    return (
-      <div className="relative min-h-screen bg-[#030912] overflow-hidden">
-        <SocialSidebar />
-        <SupportBar />
-        <Navbar />
-        <Countdown />
-      </div>
-    );
-  }
 
   return (
     <div className="relative h-screen bg-[#030912] overflow-hidden">
