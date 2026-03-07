@@ -12,6 +12,8 @@ import { WorldNewsTicker } from "./world-news-ticker";
 import { WorldIntroModal } from "./world-intro-modal";
 import { WorldMobileCountrySheet } from "./world-mobile-country-sheet";
 import { WorldMobilePulseFeed } from "./world-mobile-pulse-feed";
+import { WorldMarkets } from "./world-markets";
+import { WorldMobileMarkets } from "./world-mobile-markets";
 
 function WorldUIInner() {
   const t = useTranslations("World");
@@ -28,6 +30,7 @@ function WorldUIInner() {
   } = useCountryContext();
 
   const [pulseOpen, setPulseOpen] = useState(false);
+  const [marketsOpen, setMarketsOpen] = useState(false);
 
   const handleCountryClick = useCallback(
     (name: string, pos: { x: number; y: number }) => {
@@ -58,26 +61,30 @@ function WorldUIInner() {
         </div>
       )}
 
-      {/* Title overlay — desktop (top-right), hidden when country panel is open */}
-      {!(selectedCountry && showPanel) && (
-        <div className="absolute top-[240px] right-[70px] z-30 pointer-events-none text-right hidden lg:block">
-          <p className="font-chamberi-display font-bold text-[#C29FFF]/60 text-xs tracking-[0.3em] uppercase mb-2">
-            {t("label")}
-          </p>
-          <h1 className="font-ghavettor text-gradient-gold text-4xl leading-none">
-            {t("title")}
-          </h1>
-          <p className="font-caslon text-[#868686] text-xs mt-3 max-w-[200px] ml-auto">
-            {t("description")}
-          </p>
-        </div>
-      )}
+      {/* Title overlay — desktop (bottom-right) */}
+      <div className="absolute bottom-12 right-[70px] z-30 pointer-events-none text-right hidden lg:block">
+        <p className="font-chamberi-display font-bold text-[#C29FFF]/60 text-xs tracking-[0.3em] uppercase mb-2">
+          {t("label")}
+        </p>
+        <h1 className="font-ghavettor text-gradient-gold text-4xl leading-none">
+          {t("title")}
+        </h1>
+        <p className="font-caslon text-[#868686] text-xs mt-3 max-w-[200px] ml-auto">
+          {t("description")}
+        </p>
+      </div>
+
+      {/* Markets — desktop (top-right, where title was), hidden when country panel is open */}
+      {!(selectedCountry && showPanel) && <WorldMarkets />}
 
       {/* Pulse Feed - Desktop (left panel) */}
       <WorldPulseFeed />
 
       {/* Pulse Feed - Mobile (drawer controlled by stats bar) */}
       <WorldMobilePulseFeed open={pulseOpen} onClose={() => setPulseOpen(false)} />
+
+      {/* Markets - Mobile (drawer controlled by stats bar) */}
+      <WorldMobileMarkets open={marketsOpen} onClose={() => setMarketsOpen(false)} />
 
       {/* Country Events - Desktop (follows click position) */}
       {selectedCountry && showEvents && clickPos && (
@@ -106,7 +113,7 @@ function WorldUIInner() {
       )}
 
       {/* Bottom overlays */}
-      <WorldStatsBar onPulseClick={() => setPulseOpen(true)} />
+      <WorldStatsBar onPulseClick={() => setPulseOpen(true)} onMarketsClick={() => setMarketsOpen(true)} />
       <WorldNewsTicker />
       <WorldIntroModal />
     </>
